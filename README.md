@@ -64,6 +64,9 @@
 
 - ユーザーはお店にタグ付けできる
 
+# **■画面遷移図****
+Figma:
+https://www.figma.com/file/H5gD3hq93vnclZYDN6a2es/Portfolio_transition_diagram?type=design&node-id=0%3A1&t=AUD7OXOHWT7Y42mC-1
 
 **### スケジュール**
 
