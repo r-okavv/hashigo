@@ -1,17 +1,17 @@
 # exam_app
 
-# **■サービス名****
+# **■サービス名**
 
 二軒目探しお助けサービス（仮名）
 
-# **■サービス概要****
+# **■サービス概要**
 
 「次どうする？」を解決するための、2次会、3次会のお店探しを手助けするサービスです。
 
 一次会の場所から近いお店を検索し、ユーザーの好みに合わせてリストアップします。
 
 
-# **■ターゲットユーザー****
+# **■ターゲットユーザー**
 
 
 - 飲み会で二次会のお店探しに苦労した経験がある人
@@ -19,7 +19,7 @@
 - キャッチに捕まって微妙なお店に案内された経験がある人
 
 
-# **■ユーザーの抱える課題****
+# **■ユーザーの抱える課題**
 
 - 二次会のお店探しは、当日まで人数が確定せず予約ができない。しかしながらお店選びにスピードが要求されるために苦労する。特に土地勘がない場所では難しい。
 - グルメサイトの評価点数は、企業の都合によって操作されていると言われており、信頼性に欠ける。
@@ -28,7 +28,7 @@
 - 適当に入ったお店では、また訪れたくなっても店の名前を覚えていないことがよくある。
 
 
-# **■解決方法****
+# **■解決方法**
 
 - 現在地から近隣で評価の高いお店をリストアップする。
 - リストの中から迷った場合には、アプリがランダムにお店を提案する。
@@ -36,7 +36,7 @@
 - サイト内でのお店のブックマーク数を可視化し、より信頼性の高い情報を提供する。
 
 
-# **■機能****
+# **■機能**
 
 1. ユーザー登録機能
 
@@ -64,21 +64,27 @@
 
 - ユーザーはお店にタグ付けできる
 
-# **■画面遷移図****
+# **■画面遷移図**
 Figma:
 https://www.figma.com/file/H5gD3hq93vnclZYDN6a2es/Portfolio_transition_diagram?type=design&node-id=0%3A1&t=AUD7OXOHWT7Y42mC-1
 
-**### スケジュール**
 
-README〜ER図作成: 6/19 〆切
+# **■ER図**
+![ER diagram](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Portfolio_erDiagram#R7Z1bc9o4GIZ%2Fy14ws72ggzHmcFnSQ2Y23dlN2m33KqNgYdQIi5VFgP76lWzJ2IiDTcEmSDOZiXVAtvW91iN9kuyGezNdfqJgNvlMfIgb7Za%2FbLjvG%2B220%2Bp1%2BT8Rs0piuo6bRAQU%2BTLTOuIB%2FYTqlzJ2jnwY5TIyQjBDs3zkiIQhHLFcHKCULPLZxgTnzzoDAdQiHkYA67HfkM8mSWzfa63jbyEKJurMTkumTIHKLCOiCfDJIhPlfmi4N5QQlhxNlzcQi8pT9ZL87uOO1PTCKAxZkR%2B8fO1Pu4v5h39uf3z69if4%2B0cwuW3KUl4Anssb%2FhpBGskrZitVDfziZ%2BKQgScRNYwYoExay23xCF7%2FDKAQUh7hxGGMwSxCcfYkZoKwfwdWZM5UQSo0HKMl9O8TY4m83G53vDARFIWPeeEP8mJEMsAoCPnxiN%2B6OOOQwohfyx2ImMwxYVMsD%2FV6UjcNKYPLTJSst0%2BQTCGjK55FpnakCaWGXRlcrAXhDGTcJCuGvowEUoRBWnJ6snsuWhAG%2FNbSs3UPnq235WTuxrkA5lUTAgaHZB76UVYa%2FCBzl%2BuoWDAlxNPWxLNfN%2FdC%2FsMJoeinUAuW1s1qKQ4v0BSDkD9XwN%2BIGpK4HYk1gTC%2BIZgIwYUkhJrmRCafktkXQAPIZMSMoJDFNeQN%2BR%2Bvs5vWW6%2Fh8Wu94WFnHeZ%2FIjtlNySMGOXaFmVALrEFFDIbMjKThWI4VuVTaRBx%2FEQYI9OdKtz7PB6WZkktbsojK8WcLsqKwNVE8NcfO2XA758hgNeijxsO0XCDtdG2WHZrXaf1u1nxm80F4dU5xnHbO0G%2BD3nTMVxMEIMPMzASmRacXYcajb1PwGFzZezjljTPlpaiZGkVtAUdTQY8OyeS%2B078kjfTAW%2Bo65WFokaSdxhx46MwuEt%2B2d3QjXchulnufsy7J9VRoeIqEJJnoVIIKq0zQqVbN1S6xUVQTdsBfaTKOy9RvMK2unai9DQNhGAKU6bwx4e33peOlEsQinEI6VuE1I6QQd0IGRiLkH5hW107QpQTMSMCOAUIW4iUlopxEFE%2BNguN6qDhtOumRs8xhRJK3xYTzZ7uyB7R1YxB%2F3EGomhBqG%2BJUV425iHDtcioHBle7cjoGIMMt7B1rh4Zups64qe1mCgvFeMw4Xi6KwL6AVRTT9LWVFwAVATgDfGEBCQE%2BI7EIhDG%2BAEZW0lygDkjeVPFXHkn1sDwiA%2F3Salx5EeEFXxg6K%2Bz%2FISUfCGfQbhKUrL5loh9F8dvPRn6N5PyfpkNKETpWlG9azKnI7ivimSbKqplr3goxIChF5grfo80%2FhL8a2QWduTXWqQ0UUWwGJ7yV2spHCyo7Xn5gpJb1go6mab0%2Bdd7jmkwp0Dwfm%2B3pGHach7XcfLG2jbf1d%2FaWJyrE%2BHYac%2FTr6XpFBbGnsU023VwLhnoE58GraZx7ORnWhX67KddT3MS5ezpbnqn7W4WKa4KKdnp0NO7KUqjpXgX41xoMXdC1LEzounCQ31GNARTYP0W5aViHEjSgZYFSY0g2bawplKQKKsbCJISroarB4m%2B7wOTMGCIzf31Ik0fjtCUP%2FjG8uQI55Q5PNF9lpYnlfNk65qbaoFSwvd5bUApbq6rB4ru%2BhRTOxYnR%2BrFOJyoNw1YelRJj23LbyqlR69nCiyUwC0smj3dp005LITnSqKCmwAwc0FRQivmgWJgQVE9KPp1g0KdzABQDApb59pB0dd91mQGw0eG7FbiY%2FRiHCz61idVPSzSt7%2FVB4vdWzmuDBZK4BYWzb7ukB5hEkFLiyMFYx4tPEuL6mnRqZ0Wu12P10YLu0Q3rQp9iS6D%2BDGcT5%2FE0lxLi7KCMY4Wg90vG7C0OBstenXTYrB7SHlltBjY9VJpVejrpYDvUxhFFhXl1WIcKtp6Z2O9v%2FORgcDu8cxLw1NNetk9nul6qNOvc7IbcYrxv8yCmF5hYVzKHs%2B2vhHHoD2ebbsXJ31zvr4Xx%2B7xPIlyjOseuHZrzsmHluXRUvseT7etyeBj3WipbLDp2sFmWhX6YJOuRwuvDzIXIRrzoGL351wAVGrf7%2Bnq23MMgordoJNWhb5Bh4HA0uQ4tRhHk44%2B2h0S8jwF9Nn6LjffT5f3XRZ1WZ3Pddmx48uTuy7TB%2BL1uC47%2BvjSINdlxw4w06rQB5iNdheLZ4UXLV4nNJoAGsHkCrv%2FzcVHjodzNhZfHFFBfhTI%2F1iSOswpSWUcJfoQXQwaPP0er%2Ffi193KHryJC2oJNTTHYIrwKvnBLcQvkKERyKRHcQMkUp32bJlNSE4tUkJCxU7jddoLoIiPnpucBYDNqYDF3nwjMNuVZSGNJxJ7rWT00MKQcbM1ZXdF%2FyWhswkIZZHtJI7LkDUlnd7FZYxZJgWFfqxokdRSNxqn8EYujMa8dHWe%2BMFLpBZjMXMS8fmD%2FGWlZfE7eXpGvDhRJm85yTNsSrHm8j2B0XMQv8%2B4uWFL0aIIC7q95H%2Bn9yZzmT4cEbGvj8j7Ey9Ephipi032%2BG3cgY%2BiGQYr1SONc7dbv6GpaOBBKAW3IcFtndhElPzxSHSptHrZfdvq3PElWkPz%2BrrWc3Jyz0n57lLt7viOyZ6TjvWcpFWhe07mEaTWdXKcXMzDib74y%2BKkcpzU7ojv6OvHDMJJ8YmTq8eJvoDMzu7%2BqmiMg4rj6VucL%2F4rRLrd5SiUKfbsul23oi8KddX2EuWz7W98CKjoF4U2C%2BpU%2FEUhT3fxfbHLzA8tM%2B8UHXQOztVL8Kzv4eRTNemz8Hqmajzd92DQVI1nnQ9pVejOh9fXRazOrV1COcZ1GT3rhzi5H6I8Wmp3a3sl9rFdmRfCs16ItCp0L0QI7GuSjpGKcSDpWpD8CkhKj1K7%2BUFq%2Fa%2FX65qLkK5FyNoF2dKsfg4XJDcIXX1XhhaB%2BNvlyZfMRXD9%2BfI4tEpDxbyShVycOx%2Fjgx9Dl8%2FKQRen8nafzsX5i5%2B01l9vdPEO5mOlcrx1naLmVVvVzu3B9jY92G4xD%2FbhVoEHKRHr7tbZeSs6%2BUx8KHL8Dw%3D%3D)
 
-メイン機能実装: 6/19 - 7/24
 
-β版をRUNTEQ内リリース（MVP）: 7/24 〆切
 
-本番リリース: 7月末
+**スケジュール**
 
-**### 技術選定**
+- README〜ER図作成: 6/19 〆切
+
+- メイン機能実装: 6/19 - 7/24
+
+- β版をRUNTEQ内リリース（MVP）: 7/24 〆切
+
+- 本番リリース: 7月末
+
+**技術選定**
 
 Rails7
 
@@ -95,3 +101,4 @@ API
 - Map JavaScript API
 - Places API
 - Geocoding API
+
