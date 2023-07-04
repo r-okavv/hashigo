@@ -21,7 +21,8 @@
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
+      <li><a>Bookmarks</a></li>
+      <li><a>Browsing history</a></li>
       <li tabindex="0">
         <details>
           <summary>Parent</summary>
@@ -31,10 +32,9 @@
           </ul>
         </details>
       </li>
-      <li><a>Item 3</a></li>
     </ul>
   </div>
   <div class="navbar-end">
-    <%= link_to 'Login', login_path, class: 'btn'%>
+    <%= link_to 'Logout', logout_path, data: { turbo_method: :delete }, class:'btn'%>
   </div>
 </div>

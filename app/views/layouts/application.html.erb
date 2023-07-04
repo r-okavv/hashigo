@@ -12,8 +12,12 @@
   </head>
 
   <body>
-      <%= render 'shared/before_login_header' %>
-      <%= yield %>
-      <%= render 'shared/footer' %>
+    <% if current_user %>
+        <%= render 'shared/header' %>
+    <% else %>
+        <%= render 'shared/before_login_header' %>
+    <% end %>
+    <%= yield %>
+    <%= render 'shared/footer' %>
   </body>
 </html>
