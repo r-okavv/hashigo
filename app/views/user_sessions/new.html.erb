@@ -1,4 +1,22 @@
-
-<%= render 'form' %>
-
-<%= link_to 'SignUp', new_user_path %>
+<div class="w-full max-w-xs">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div class="mb-6 text-center">
+        <h1>Login</h1>
+      </div>
+      <%= form_with model: @user, local: true do |f| %>
+        <div class="mb-6">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div class="mb-6">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <%= f.submit 'Login', class: 'btn' %>
+      <% end %>
+      <div class='text-center'>
+        <p>don't have account?</p>
+        <%= link_to 'Signup', new_user_path %>
+      </div>
+    </div>
+</div>

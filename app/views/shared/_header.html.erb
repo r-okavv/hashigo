@@ -35,6 +35,6 @@
     </ul>
   </div>
   <div class="navbar-end">
-    <a href="#" class="btn">Logout</a>
+    <%= link_to 'Logout', logout_path, data: { turbo_method: :delete }, class:'btn'%>
   </div>
 </div>
