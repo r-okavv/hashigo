@@ -80,3 +80,4 @@ gem 'rails-i18n'
 gem 'sorcery'
 
 gem "dockerfile-rails", ">= 1.5", :group => :development
+
