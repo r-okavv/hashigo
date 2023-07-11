@@ -78,3 +78,5 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 gem 'rails-i18n'
 gem 'sorcery'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
