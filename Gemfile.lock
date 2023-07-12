@@ -84,6 +84,10 @@ GEM
     diff-lcs (1.5.0)
     dockerfile-rails (1.5.1)
       rails
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -96,7 +100,12 @@ GEM
     faraday-net_http (3.0.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    google_places (2.0.0)
+      httparty (>= 0.13.1)
     hashie (5.0.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -136,7 +145,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
-
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
       snaky_hash (~> 2.0)
@@ -262,7 +270,9 @@ DEPENDENCIES
   cssbundling-rails
   debug
   dockerfile-rails (>= 1.5)
+  dotenv-rails
   factory_bot_rails
+  google_places
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
