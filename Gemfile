@@ -80,3 +80,4 @@ gem "dockerfile-rails", ">= 1.5", :group => :development
 gem 'dotenv-rails'
 gem 'google_places'
 gem 'geocoder'
+gem 'gon'
