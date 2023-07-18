@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get 'user_sessions/destroy'
 
   resources :users, only: %i[new create]
-  get 'searche', to: 'searches#new', as: 'search'
+  get 'search', to: 'searches#search', as: 'search'
+  get 'result', to: 'searches#result', as: 'result'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

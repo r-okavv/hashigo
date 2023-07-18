@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
-    def new; end
+    def search
+    redirect_to result_path
+    end
 
     def result
     end
