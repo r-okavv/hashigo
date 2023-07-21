@@ -1,0 +1,17 @@
+<h1>Places Near Address</h1>
+
+<%= form_tag search_places_path, method: :get do %>
+  <%= text_field_tag :address, params[:address], placeholder: 'Enter address' %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<% if @places.present? %>
+  <h2>Nearby Places:</h2>
+  <ul>
+    <% @places.each do |place| %>
+      <li><%= place['name'] %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No places found nearby.</p>
+<% end %>

@@ -284,6 +284,7 @@ DEPENDENCIES
   geocoder
   gon
   google_places
+  httparty
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
