@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   # get 'search', to: 'searches#search', as: 'search'
   # post 'search', to: 'searches#search'
-  get 'result', to: 'searches#result', as: 'result'
+  # get 'result', to: 'searches#result', as: 'result'
   get 'index', to: 'searches#index'
-  get '/search', to: 'searches#search', as: 'search_places'
+  get 'search', to: 'searches#search', as: 'search_places'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
