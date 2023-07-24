@@ -1,8 +1,8 @@
 <h1>Places Near Address</h1>
 
-<%= form_tag search_places_path, method: :get do %>
-  <%= text_field_tag :address, params[:address], placeholder: 'Enter address' %>
-  <%= submit_tag 'Search' %>
+<%= form_with url: search_places_path, method: :get do |form| %>
+  <%= form.text_field :address, placeholder: 'Enter address', value: params[:address] %>
+  <%= form.submit 'Search' %>
 <% end %>
 
 <% if @places.present? %>
