@@ -1,0 +1,20 @@
+<h1>Nearby Restaurants</h1>
+
+<%= form_with(url: restaurants_path, method: :get) do |form| %>
+  <%= form.text_field :address, placeholder: 'Enter address' %>
+  <%= form.submit 'Search' %>
+<% end %>
+
+<% if @restaurants.any? %>
+  <ul>
+    <% @restaurants.each do |restaurant| %>
+      <li><%= restaurant.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <% if @address.present? %>
+    <p>No restaurants found nearby.</p>
+  <% else %>
+    <p>Enter an address to search for nearby restaurants.</p>
+  <% end %>
+<% end %>
