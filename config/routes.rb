@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # post 'search', to: 'searches#search'
   # get 'result', to: 'searches#result', as: 'result'
   resources :restaurants, only: [:index]
+  get 'restaurants/search', to: 'restaurants#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

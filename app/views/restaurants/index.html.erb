@@ -1,57 +1,58 @@
-<div data-turbo="false">
-  <h1>Nearby Restaurants</h1>
+<%# <div data-turbo="false"> %>
+<h1>Nearby Restaurants</h1>
 
-    <!-- 地図表示 -->
-    <div id="map" style="height: 500px;"></div>
+<%= form_with(url: restaurants_search_path, method: :get, id: "search-form") do |form| %>
+  <%= form.text_field :address, placeholder: 'Enter address or click "Search from Current Location"' %>
+  <%= form.submit 'Search' %>
+  <%= button_tag 'Search from Current Location', type: 'button', id: 'current-location-button' %>
+  <%= hidden_field_tag :latitude %>
+  <%= hidden_field_tag :longitude %>
+<% end %>
 
-    <%= form_with(url: restaurants_path, method: :get) do |form| %>
-      <%= form.text_field :address, placeholder: 'Enter address or type "現在地" for current location' %>
-      <%= form.submit 'Search' %>
-      <%= button_to "現在地から取得", "#", type: "button", id: "current-location-button", onclick: "fetchCurrentLocation();" %>
+<% if gon.restaurants&.any? %>
+  <ul>
+    <% gon.restaurants.each do |place| %>
+      <li><%= place.name %> - <%= place.formatted_address %></li>
     <% end %>
+  </ul>
+<% else %>
+  <p><%= gon.message || "Please enter address or click 'Search from Current Location'" %></p>
+<% end %>
 
-  <% if @latitude && @longitude%>
-    <% if @restaurants.any? %>
-      <ul>
-        <% @restaurants.each do |restaurant| %>
-          <li><%= restaurant.name %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No restaurants found nearby.</p>
-    <% end %>
-  <% else %>
-    <p>現在地から取得ボタンをクリックするか住所を入力してください。</p>
-  <% end %>
+<!-- Google Maps JavaScript APIの読み込み -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+<!-- JavaScriptコード -->
+<script>
+  function initMap() {
+    // Google Mapsの初期設定
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: gon.latitude || 35.6895, lng: gon.longitude || 139.6917 }, // デフォルトの中心座標 (東京駅)
+      zoom: 15
+    });
 
-  <!-- JavaScriptコード -->
-  <script>
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 35.6895, lng: 139.6917 }, // デフォルトの中心座標 (東京駅)
-        zoom: 15
-      });
-    }
-
-    function fetchCurrentLocation() {
+    // 現在地から検索するボタンのクリックイベントリスナー
+    document.getElementById('current-location-button').addEventListener('click', function() {
       if (navigator.geolocation) {
         // 現在地の位置情報を取得
         navigator.geolocation.getCurrentPosition(function(position) {
           var latitude = position.coords.latitude;
           var longitude = position.coords.longitude;
 
-          // 現在地の緯度経度をフォームにセット
-          document.getElementById('restaurants_latitude').value = latitude;
-          document.getElementById('restaurants_longitude').value = longitude;
+          // フォームの緯度経度フィールドに値を設定
+          document.getElementById('latitude').value = latitude;
+          document.getElementById('longitude').value = longitude;
 
           // フォームを送信
-          document.getElementById('restaurants_form').submit();
+          document.getElementById('search-form').submit();
         });
       } else {
         alert('Geolocation is not supported by this browser.');
       }
-    }
-  </script>
-</div>
+    });
+  }
+</script>
+
+<div id="map" style="height: 500px;"></div>
+
+<%# </div> %>
