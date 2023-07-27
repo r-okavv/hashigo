@@ -1,20 +1,57 @@
-<h1>Nearby Restaurants</h1>
+<div data-turbo="false">
+  <h1>Nearby Restaurants</h1>
 
-<%= form_with(url: restaurants_path, method: :get) do |form| %>
-  <%= form.text_field :address, placeholder: 'Enter address' %>
-  <%= form.submit 'Search' %>
-<% end %>
+    <!-- 地図表示 -->
+    <div id="map" style="height: 500px;"></div>
 
-<% if @restaurants.any? %>
-  <ul>
-    <% @restaurants.each do |restaurant| %>
-      <li><%= restaurant.name %></li>
+    <%= form_with(url: restaurants_path, method: :get) do |form| %>
+      <%= form.text_field :address, placeholder: 'Enter address or type "現在地" for current location' %>
+      <%= form.submit 'Search' %>
+      <%= button_to "現在地から取得", "#", type: "button", id: "current-location-button", onclick: "fetchCurrentLocation();" %>
     <% end %>
-  </ul>
-<% else %>
-  <% if @address.present? %>
-    <p>No restaurants found nearby.</p>
+
+  <% if @latitude && @longitude%>
+    <% if @restaurants.any? %>
+      <ul>
+        <% @restaurants.each do |restaurant| %>
+          <li><%= restaurant.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No restaurants found nearby.</p>
+    <% end %>
   <% else %>
-    <p>Enter an address to search for nearby restaurants.</p>
+    <p>現在地から取得ボタンをクリックするか住所を入力してください。</p>
   <% end %>
-<% end %>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+
+  <!-- JavaScriptコード -->
+  <script>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 35.6895, lng: 139.6917 }, // デフォルトの中心座標 (東京駅)
+        zoom: 15
+      });
+    }
+
+    function fetchCurrentLocation() {
+      if (navigator.geolocation) {
+        // 現在地の位置情報を取得
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+
+          // 現在地の緯度経度をフォームにセット
+          document.getElementById('restaurants_latitude').value = latitude;
+          document.getElementById('restaurants_longitude').value = longitude;
+
+          // フォームを送信
+          document.getElementById('restaurants_form').submit();
+        });
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    }
+  </script>
+</div>

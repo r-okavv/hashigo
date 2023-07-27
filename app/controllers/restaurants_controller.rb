@@ -2,31 +2,30 @@ class RestaurantsController < ApplicationController
   def index
     # @address = params[:address]
     # @restaurants = fetch_nearby_restaurants(@address)
-    if params[:address].present? && params[:address] != '現在地'
+    if params[:current_location].present?
+      binding.pry
+      # 現在地から店舗情報を取得
+      @latitude = params[:latitude].to_f
+      @longitude = params[:longitude].to_f
+    elsif params[:address].present?
+      # 入力された住所から店舗情報を取得
+      binding.pry
       @address = params[:address]
       @latitude, @longitude = fetch_coordinates(@address)
-    else
-      @address = '現在地'
-      @latitude, @longitude = fetch_current_location
+    end
 
     if @latitude && @longitude
       # 住所から店舗情報を取得
       @restaurants = fetch_nearby_restaurants(@latitude, @longitude)
-    elsif params[:current_location].present?
-      # 現在地から店舗情報を取得
-      @latitude, @longitude = fetch_current_location
-      @restaurants = fetch_nearby_restaurants(@latitude, @longitude)
     else
       @restaurants = []
+    end
   end
 
   private
 
   def fetch_nearby_restaurants(latitude, longitude)
     places_client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
-
-    # 住所を緯度経度に変換
-    result = Geocoder.search(address).first
     places_client.spots(latitude, longitude, types: ['restaurant'], radius: 50)
 
     # latitude = result&.latitude
@@ -44,15 +43,5 @@ class RestaurantsController < ApplicationController
   def fetch_coordinates(address)
     result = Geocoder.search(address).first
     [result&.latitude, result&.longitude]
-  end
-
-  # 現在地を取得して返す
-  def fetch_current_location
-    if request.location.present?
-      [request.location.latitude, request.location.longitude]
-    else
-      # TODO：現在地取得に失敗した場合の対応を追加する
-      nil
-    end
   end
 end
