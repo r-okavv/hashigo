@@ -1,16 +1,25 @@
 <div data-turbo="false">
 <div class="container mx-auto">
+  <div class="mb-6">
+    <button id="get-location" class="btn">現在地を取得</button>
+  </div>
+
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
-    <%= f.label :address, '住所' %>
-    <%= f.text_field :address, id: 'address' %>
-    <%= f.submit '検索', id: 'search-address' %>
+    <div class="mb-6">
+      <%= f.label :address, '住所' %>
+      <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
+    </div>
+    <div class="mb-6">
+      <%= f.submit '検索', id: 'search-address',class:'btn' %>
+    </div>
   <% end %>
 
-  <button id="get-location">現在地を取得</button>
-
+  <div class="mb-6">
+    <p>周辺のお店リスト</p>
+  </div>
   <div id="restaurant-list">
     <% @restaurants.each do |restaurant| %>
-      <p><%= restaurant.name %></p>
+      <li><%= restaurant.name %></li>
     <% end %>
   </div>
 </div>
