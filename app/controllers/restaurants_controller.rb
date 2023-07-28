@@ -1,33 +1,19 @@
 class RestaurantsController < ApplicationController
   def index
-  end
-
-  def search
+    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
+    
     if params[:address].present?
-      latitude, longitude = geocode_address(params[:address])
+      location = Geocoder.search(params[:address]).first
+      if location
+        @restaurants = @client.spots(location.latitude, location.longitude, radius: 50, types: ['restaurant']).first(20)
+      else
+        @restaurants = []
+      end
     elsif params[:latitude].present? && params[:longitude].present?
-      latitude = params[:latitude].to_f
-      longitude = params[:longitude].to_f
+      # Todo: paramsで直接parameterを渡さないよう処理する
+      @restaurants = @client.spots(params[:latitude], params[:longitude], radius: 100, types: ['restaurant']).first(20)
     else
-      return
+      @restaurants = []
     end
-
-    # 周辺の飲食店情報を取得
-    radius = 50 # 50m radius for nearby places
-    places = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY']).spots(latitude, longitude, radius: radius, types: 'restaurant')
-
-    @restaurants = places
-    # 緯度経度と周辺の飲食店情報をJavaScriptで取得可能にする
-    gon.latitude = latitude
-    gon.longitude = longitude
-  end
-
-  private
-
-  def geocode_address(address)
-    results = Geocoder.search(address)
-    latitude = results.first&.latitude
-    longitude = results.first&.longitude
-    [latitude, longitude]
   end
 end

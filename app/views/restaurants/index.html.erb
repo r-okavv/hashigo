@@ -1,58 +1,48 @@
-<%# <div data-turbo="false"> %>
-<h1>Nearby Restaurants</h1>
+<div data-turbo="false">
+<div class="container mx-auto">
+  <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
+    <%= f.label :address, '住所' %>
+    <%= f.text_field :address, id: 'address' %>
+    <%= f.submit '検索', id: 'search-address' %>
+  <% end %>
 
-<%= form_with(url: restaurants_search_path, method: :get, id: "search-form") do |form| %>
-  <%= form.text_field :address, placeholder: 'Enter address or click "Search from Current Location"' %>
-  <%= form.submit 'Search' %>
-  <%= button_tag 'Search from Current Location', type: 'button', id: 'current-location-button' %>
-  <%= hidden_field_tag :latitude %>
-  <%= hidden_field_tag :longitude %>
-<% end %>
+  <button id="get-location">現在地を取得</button>
 
-<% if gon.restaurants&.any? %>
-  <ul>
-    <% gon.restaurants.each do |place| %>
-      <li><%= place.name %> - <%= place.formatted_address %></li>
+  <div id="restaurant-list">
+    <% @restaurants.each do |restaurant| %>
+      <p><%= restaurant.name %></p>
     <% end %>
-  </ul>
-<% else %>
-  <p><%= gon.message || "Please enter address or click 'Search from Current Location'" %></p>
-<% end %>
+  </div>
+</div>
 
-<!-- Google Maps JavaScript APIの読み込み -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 
-<!-- JavaScriptコード -->
 <script>
-  function initMap() {
-    // Google Mapsの初期設定
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: gon.latitude || 35.6895, lng: gon.longitude || 139.6917 }, // デフォルトの中心座標 (東京駅)
-      zoom: 15
-    });
+// ToDo: あとでapplication.jsに分ける
 
-    // 現在地から検索するボタンのクリックイベントリスナー
-    document.getElementById('current-location-button').addEventListener('click', function() {
-      if (navigator.geolocation) {
-        // 現在地の位置情報を取得
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
+document.addEventListener('DOMContentLoaded', function() {
+  const getLocationButton = document.getElementById('get-location');
+  getLocationButton.addEventListener('click', function() {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      return;
+    }
 
-          // フォームの緯度経度フィールドに値を設定
-          document.getElementById('latitude').value = latitude;
-          document.getElementById('longitude').value = longitude;
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-          // フォームを送信
-          document.getElementById('search-form').submit();
-        });
-      } else {
-        alert('Geolocation is not supported by this browser.');
-      }
-    });
-  }
+      window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
+    }
+
+    function error() {
+      alert('Unable to retrieve your location');
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  });
+});
+
+
 </script>
 
-<div id="map" style="height: 500px;"></div>
-
-<%# </div> %>
+</div>
