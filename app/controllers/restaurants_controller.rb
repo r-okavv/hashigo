@@ -1,24 +1,19 @@
 class RestaurantsController < ApplicationController
   def index
-    @address = params[:address]
-    @restaurants = fetch_nearby_restaurants(@address)
-  end
-
-  private
-
-  def fetch_nearby_restaurants(address)
-    places_client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
-
-    # 住所を緯度経度に変換
-    result = Geocoder.search(address).first
-    latitude = result&.latitude
-    longitude = result&.longitude
-
-    if latitude && longitude
-      # Google Places APIにリクエストして飲食店情報を取得
-      places_client.spots(latitude, longitude, types: ['restaurant'], radius: 50)
+    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
+    
+    if params[:address].present?
+      location = Geocoder.search(params[:address]).first
+      if location
+        @restaurants = @client.spots(location.latitude, location.longitude, radius: 50, types: ['restaurant']).first(20)
+      else
+        @restaurants = []
+      end
+    elsif params[:latitude].present? && params[:longitude].present?
+      # Todo: paramsで直接parameterを渡さないよう処理する
+      @restaurants = @client.spots(params[:latitude], params[:longitude], radius: 100, types: ['restaurant']).first(20)
     else
-      [] # 変換できなかった場合は空の配列を返す
+      @restaurants = []
     end
   end
 end

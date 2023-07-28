@@ -1,20 +1,57 @@
-<h1>Nearby Restaurants</h1>
+<div data-turbo="false">
+<div class="container mx-auto">
+  <div class="mb-6">
+    <button id="get-location" class="btn">現在地を取得</button>
+  </div>
 
-<%= form_with(url: restaurants_path, method: :get) do |form| %>
-  <%= form.text_field :address, placeholder: 'Enter address' %>
-  <%= form.submit 'Search' %>
-<% end %>
+  <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
+    <div class="mb-6">
+      <%= f.label :address, '住所' %>
+      <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
+    </div>
+    <div class="mb-6">
+      <%= f.submit '検索', id: 'search-address',class:'btn' %>
+    </div>
+  <% end %>
 
-<% if @restaurants.any? %>
-  <ul>
+  <div class="mb-6">
+    <p>周辺のお店リスト</p>
+  </div>
+  <div id="restaurant-list">
     <% @restaurants.each do |restaurant| %>
       <li><%= restaurant.name %></li>
     <% end %>
-  </ul>
-<% else %>
-  <% if @address.present? %>
-    <p>No restaurants found nearby.</p>
-  <% else %>
-    <p>Enter an address to search for nearby restaurants.</p>
-  <% end %>
-<% end %>
+  </div>
+</div>
+
+
+<script>
+// ToDo: あとでapplication.jsに分ける
+
+document.addEventListener('DOMContentLoaded', function() {
+  const getLocationButton = document.getElementById('get-location');
+  getLocationButton.addEventListener('click', function() {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      return;
+    }
+
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
+    }
+
+    function error() {
+      alert('Unable to retrieve your location');
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  });
+});
+
+
+</script>
+
+</div>
