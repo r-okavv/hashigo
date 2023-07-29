@@ -10,6 +10,10 @@
       <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
     </div>
     <div class="mb-6">
+      <%= f.label :radius, '検索範囲（メートル）' %>
+      <%= f.number_field :radius, value: 50, min: 10, step: 10 %>
+    </div>
+    <div class="mb-6">
       <%= f.submit '検索', id: 'search-address',class:'btn' %>
     </div>
   <% end %>
@@ -39,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
+      // const radius = document.querySelector('input[name="radius"]').value || 50;
 
       window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
     }
