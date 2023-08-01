@@ -1,13 +1,15 @@
 <div data-turbo="false">
 <div class="container mx-auto">
-  <div class="mb-6">
-    <button id="get-location" class="btn">現在地から検索</button>
-  </div>
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
     <div class="mb-6">
+      <button type="button" id="get-location" class="btn">現在地を取得</button>
+    </div>
+
       <%= f.label :address, '住所' %>
       <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
+      <%= f.hidden_field :latitude, id: 'latitude' %>
+      <%= f.hidden_field :longitude, id: 'longitude' %>
     </div>
     <div class="mb-6">
       <%= f.label :radius, '検索範囲（メートル）' %>
@@ -30,16 +32,9 @@
 
 
 <script>
-// ToDo: あとでapplication.jsに分ける
-
 document.addEventListener('DOMContentLoaded', function() {
   const getLocationButton = document.getElementById('get-location');
   getLocationButton.addEventListener('click', function() {
-      const radiusInput = document.querySelector('input[name="radius"]');
-      const radius = radiusInput.value || 50;
-
-      console.log(`Radius value: ${radius}`); // Debug: radiusの値をコンソールに出力
-
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
       return;
@@ -49,8 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-
-      window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
+      // サーバーに緯度と経度を送信
+      fetch('/get_location', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector("meta[name='csrf-token']").getAttribute("content")
+        },
+        body: JSON.stringify({latitude: latitude, longitude: longitude}),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // レスポンスから住所を取得し、フォームにセット
+        const addressInput = document.querySelector('input[name="address"]');
+        addressInput.value = data.address;
+      });
     }
 
     function error() {
@@ -60,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     navigator.geolocation.getCurrentPosition(success, error);
   });
 });
-
 
 </script>
 
