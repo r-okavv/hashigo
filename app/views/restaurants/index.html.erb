@@ -35,7 +35,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const getLocationButton = document.getElementById('get-location');
   const searchButton = document.getElementById('search-address');
-  
+
   getLocationButton.addEventListener('click', function() {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
@@ -62,6 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // レスポンスから住所を取得し、フォームにセット
         const addressInput = document.querySelector('input[name="address"]');
         addressInput.value = data.address;
+
+        // hidden fieldに緯度と経度をセット
+        document.getElementById('latitude').value = latitude;
+        document.getElementById('longitude').value = longitude;
+        
         searchButton.disabled = false; // ボタンを有効化
       });
     }
