@@ -1,7 +1,7 @@
 <div data-turbo="false">
 <div class="container mx-auto">
   <div class="mb-6">
-    <button id="get-location" class="btn">現在地を取得</button>
+    <button id="get-location" class="btn">現在地から検索</button>
   </div>
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
@@ -35,6 +35,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   const getLocationButton = document.getElementById('get-location');
   getLocationButton.addEventListener('click', function() {
+      const radiusInput = document.querySelector('input[name="radius"]');
+      const radius = radiusInput.value || 50;
+
+      console.log(`Radius value: ${radius}`); // Debug: radiusの値をコンソールに出力
+
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
       return;
@@ -43,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
-      // const radius = document.querySelector('input[name="radius"]').value || 50;
+
 
       window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
     }
