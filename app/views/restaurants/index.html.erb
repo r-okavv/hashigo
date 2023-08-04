@@ -17,15 +17,15 @@
     </div>
     <div class="mb-6">
       <%= f.label :place_type, 'Bar' %>
-      <%= f.check_box :place_type, {multiple: true, checked: true}, 'bar', nil %>
+      <%= f.check_box :place_type, {multiple: true, checked: true}, 'bar', nil  %>
       <%= f.label :place_type, 'Pub' %>
       <%= f.check_box :place_type, {multiple: true, checked: true}, 'pub', nil %>
       <%= f.label :place_type, 'Restaurant' %>
       <%= f.check_box :place_type, {multiple: true, checked: true}, 'restaurant', nil %>
     </div>
     <div class="mb-6">
-      <%= f.label :rating, 'クチコミスコア' %>
-      <%= f.range_field :rating, value: 3.5, min: 0, max: 5, step: 0.1, class:"range" %>
+      <%= f.label :rating, 'クチコミスコア'%>
+      <%= f.select :rating, [['3以上', 3], ['4以上', 4], ['5以上', 5]], {}, {class: 'select select-bordered'} %>
     </div>
     <%# <div class="mb-6"> %>
       <%# <%= f.label :closing_time, '閉店時間' %>
