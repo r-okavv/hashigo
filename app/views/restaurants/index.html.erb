@@ -1,14 +1,36 @@
 <div data-turbo="false">
 <div class="container mx-auto">
-  <div class="mb-6">
-    <button id="get-location" class="btn">現在地を取得</button>
-  </div>
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
     <div class="mb-6">
+      <button type="button" id="get-location" class="btn">現在地を取得</button>
+    </div>
+
       <%= f.label :address, '住所' %>
       <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
+      <%= f.hidden_field :latitude, id: 'latitude' %>
+      <%= f.hidden_field :longitude, id: 'longitude' %>
     </div>
+    <div class="mb-6">
+      <%= f.label :radius, '検索範囲（メートル）' %>
+      <%= f.number_field :radius, value: 50, min: 10, step: 10 %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :place_type, 'Bar' %>
+      <%= f.check_box :place_type, {multiple: true, checked: true}, 'bar', nil  %>
+      <%= f.label :place_type, 'Pub' %>
+      <%= f.check_box :place_type, {multiple: true, checked: true}, 'pub', nil %>
+      <%= f.label :place_type, 'Restaurant' %>
+      <%= f.check_box :place_type, {multiple: true, checked: true}, 'restaurant', nil %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :rating, 'クチコミスコア'%>
+      <%= f.select :rating, [['3以上', 3], ['4以上', 4], ['5以上', 5]], {}, {class: 'select select-bordered'} %>
+    </div>
+    <%# <div class="mb-6"> %>
+      <%# <%= f.label :closing_time, '閉店時間' %>
+      <%# <%= f.range_field :closing_time, value: 22, min: 0, max: 24, step: 1 %>
+    <%# </div> %>
     <div class="mb-6">
       <%= f.submit '検索', id: 'search-address',class:'btn' %>
     </div>
@@ -26,21 +48,43 @@
 
 
 <script>
-// ToDo: あとでapplication.jsに分ける
-
 document.addEventListener('DOMContentLoaded', function() {
   const getLocationButton = document.getElementById('get-location');
+  const searchButton = document.getElementById('search-address');
+
   getLocationButton.addEventListener('click', function() {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
       return;
     }
 
+    searchButton.disabled = true; // 住所が取得できるまでボタンを無効化する
+
     function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      window.location.href = `/restaurants?latitude=${latitude}&longitude=${longitude}`;
+      // サーバーに緯度と経度を送信
+      fetch('/get_location', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector("meta[name='csrf-token']").getAttribute("content")
+        },
+        body: JSON.stringify({latitude: latitude, longitude: longitude}),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // レスポンスから住所を取得し、フォームにセット
+        const addressInput = document.querySelector('input[name="address"]');
+        addressInput.value = data.address;
+
+        // hidden fieldに緯度と経度をセット
+        document.getElementById('latitude').value = latitude;
+        document.getElementById('longitude').value = longitude;
+
+        searchButton.disabled = false; // ボタンを有効化
+      });
     }
 
     function error() {
@@ -50,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
     navigator.geolocation.getCurrentPosition(success, error);
   });
 });
-
 
 </script>
 

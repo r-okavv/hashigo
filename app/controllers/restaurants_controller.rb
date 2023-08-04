@@ -1,17 +1,19 @@
 class RestaurantsController < ApplicationController
   def index
     @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
-    
-    if params[:address].present?
+    radius = params[:radius] || 50
+    # options = {radius: radius.to_i, types: params[:place_type],min_rating: params[:rating],closing_time: params[:closing_time]}
+    options = {radius: radius.to_i, types: params[:place_type],min_rating: params[:rating],closing_time: params[:closing_time]}
+
+    if params[:latitude].present? && params[:longitude].present?
+      @restaurants = @client.spots(params[:latitude], params[:longitude], options).first(20)
+    elsif params[:address].present?
       location = Geocoder.search(params[:address]).first
       if location
-        @restaurants = @client.spots(location.latitude, location.longitude, radius: 50, types: ['restaurant']).first(20)
+        @restaurants = @client.spots(location.latitude, location.longitude,options).first(20)
       else
         @restaurants = []
       end
-    elsif params[:latitude].present? && params[:longitude].present?
-      # Todo: paramsで直接parameterを渡さないよう処理する
-      @restaurants = @client.spots(params[:latitude], params[:longitude], radius: 100, types: ['restaurant']).first(20)
     else
       @restaurants = []
     end
