@@ -16,13 +16,14 @@
       <%= f.number_field :radius, value: 50, min: 10, step: 10 %>
     </div>
     <div class="mb-6">
-      <%= f.label :place_type, 'Bar' %>
-      <%= f.check_box :place_type, {multiple: true, checked: true}, 'bar', nil  %>
+      <%= f.label :place_type, 'Bar'%>
+      <%= f.radio_button :place_type, 'bar'  %>
       <%= f.label :place_type, 'Pub' %>
-      <%= f.check_box :place_type, {multiple: true, checked: true}, 'pub', nil %>
+      <%= f.radio_button :place_type, 'pub' %>
       <%= f.label :place_type, 'Restaurant' %>
-      <%= f.check_box :place_type, {multiple: true, checked: true}, 'restaurant', nil %>
+      <%= f.radio_button :place_type, 'restaurant' %>
     </div>
+
     <div class="mb-6">
       <%= f.label :rating, 'クチコミスコア'%>
       <%= f.select :rating, [['3以上', 3], ['4以上', 4], ['5以上', 5]], {}, {class: 'select select-bordered'} %>
