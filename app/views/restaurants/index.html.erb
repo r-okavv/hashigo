@@ -5,7 +5,7 @@
     <div class="mb-6">
       <button type="button" id="get-location" class="btn">現在地を取得</button>
     </div>
-
+    <div class="mb-6">
       <%= f.label :address, '住所' %>
       <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
       <%= f.hidden_field :latitude, id: 'latitude' %>
@@ -38,12 +38,10 @@
   <% end %>
 
   <div class="mb-6">
-    <p>周辺のお店リスト</p>
+    <p>検索結果</p>
   </div>
-  <div id="restaurant-list">
-    <% @restaurants.each do |restaurant| %>
-      <li><%= restaurant.name %></li>
-    <% end %>
+  <div class="card lg:card-side bg-base-100 shadow-xl">
+    <%= render @restaurants %>
   </div>
 </div>
 

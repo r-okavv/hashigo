@@ -1,0 +1,13 @@
+  <%# <figure><img src="/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure> %>
+  <%= image_tag 'default_image.jpg'%>
+  <div class="card-body">
+    <h2 class="card-title"><%= restaurant.name %></h2>
+    <li>住所：<%= restaurant.address %></li>
+    <li>電話番号：<%= restaurant.phone_number %></li>
+    <li>Googleクチコミスコア: <%= restaurant.rating %></li>
+    <%# Price level: <%= restaurant.price_level %>
+    <div class="card-actions justify-end">
+      <%= link_to '詳細', "#",class: "btn" %>
+    </div>
+  </div>
+
