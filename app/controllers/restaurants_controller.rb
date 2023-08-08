@@ -11,6 +11,7 @@ class RestaurantsController < ApplicationController
     elsif params[:address].present?
       location = Geocoder.search(params[:address]).first
       if location
+        binding.pry
         places_data = @client.spots(location.latitude, location.longitude, options).first(20)
       else
         places_data = []
@@ -22,6 +23,11 @@ class RestaurantsController < ApplicationController
     @restaurants = places_data.map do |place_data|
       restaurant = Restaurant.find_or_initialize_by(place_id: place_data.place_id)
       unless restaurant.persisted?
+        if place_data.photos.present?
+          photo = place_data.photos.first
+          photo_url = @client.spot_photo_url(photo.photo_reference, maxwidth: 400, maxheight: 300)
+        end
+        
         restaurant.attributes = {
           place_id: place_data.place_id,
           name: place_data.name,
@@ -33,6 +39,9 @@ class RestaurantsController < ApplicationController
           # opening_hours: place_data.opening_hours.to_s,
           # categories: place_data.types
           # price_level: restaurant.price_level →カラムを追加する必要あり
+          # 画像表示に必要な情報
+          # photo_reference: places_data[0].photos.first.photo_reference
+          # html_attributions: places_data[0].photos.first.html_attributions
         }
         restaurant.save
       end
