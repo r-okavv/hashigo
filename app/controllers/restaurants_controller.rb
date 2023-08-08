@@ -27,7 +27,7 @@ class RestaurantsController < ApplicationController
           photo = place_data.photos.first
           photo_url = @client.spot_photo_url(photo.photo_reference, maxwidth: 400, maxheight: 300)
         end
-        
+
         restaurant.attributes = {
           place_id: place_data.place_id,
           name: place_data.name,
@@ -36,12 +36,11 @@ class RestaurantsController < ApplicationController
           address: place_data.formatted_address,
           rating: place_data.rating,
           phone_number: place_data.formatted_phone_number,
-          # opening_hours: place_data.opening_hours.to_s,
-          # categories: place_data.types
-          # price_level: restaurant.price_level →カラムを追加する必要あり
-          # 画像表示に必要な情報
-          # photo_reference: places_data[0].photos.first.photo_reference
-          # html_attributions: places_data[0].photos.first.html_attributions
+          categories: place_data.types,
+          image_url: place_data.photos.present? ? @client.spot_photo_url(reference: place_data.photos.first.photo_reference, maxwidth: 400) : nil,
+          html_attributions: place_data.photos.first.html_attributions,
+          url: place_data.url,
+          opening_hours: place_data.opening_hours ? place_data.opening_hours.weekday_text.join(", ") : "N/A"
         }
         restaurant.save
       end
