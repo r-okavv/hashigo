@@ -1,0 +1,20 @@
+<h1><%= @restaurant.name %></h1>
+
+<p><strong>Address:</strong> <%= @restaurant.address %></p>
+<p><strong>Rating:</strong> <%= @restaurant.rating %></p>
+<p><strong>Phone Number:</strong> <%= @restaurant.phone_number %></p>
+<p><strong>Opening Hours:</strong><br> <%= @restaurant.opening_hours.split(",").join("<br>").html_safe%></p>
+<%# <p><strong>Opening Hours:</strong><br> <%= @restaurant.opening_hours.split(",").join("<br>")%>
+<p><strong>Categories:</strong> <%= @restaurant.categories %></p>
+<p><strong>Price Level:</strong> <%= @restaurant.price_level %></p>
+<p><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
+
+<% if @restaurant.image_url.present? %>
+    <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
+<% end %>
+
+<% if @restaurant.html_attributions.present? %>
+  <div>
+    <%= @restaurant.html_attributions.html_safe %>
+  </div>
+<% end %>
