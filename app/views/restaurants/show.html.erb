@@ -1,20 +1,22 @@
-<h1><%= @restaurant.name %></h1>
+<div class="container mx-auto">
+    <h1><strong><%= @restaurant.name %></strong></h1>
 
-<p><strong>住所:</strong> <%= @restaurant.address %></p>
-<p><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
-<p><strong>クチコミスコア:</strong> <%= @restaurant.rating %></p>
-<%# <p><strong>価格帯:</strong> <%= @restaurant.price_level %></p>
-<p><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
-<p><strong>Opening Hours:</strong></p>
-<%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
-<%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>
+    <li><strong>住所:</strong> <%= @restaurant.address %></p>
+    <li><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
+    <li><strong>クチコミスコア:</strong> <%= @restaurant.rating %></p>
+    <%# <p><strong>価格帯:</strong> <%= @restaurant.price_level %></p>
+    <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
+    <li><strong>Opening Hours:</strong></p>
+    <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+    <%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>
 
-<% if @restaurant.image_url.present? %>
-    <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
-<% end %>
+    <% if @restaurant.image_url.present? %>
+        <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
+    <% end %>
 
-<% if @restaurant.html_attributions.present? %>
-  <div>
-    <p>Source of photo: <%= @restaurant.html_attributions.html_safe %></p>
-  </div>
-<% end %>
+    <% if @restaurant.html_attributions.present? %>
+    <div>
+        <p>Source of photo: <%= @restaurant.html_attributions.html_safe %></p>
+    </div>
+    <% end %>
+</div>
