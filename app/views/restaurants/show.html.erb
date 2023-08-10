@@ -1,13 +1,13 @@
 <h1><%= @restaurant.name %></h1>
 
-<p><strong>Address:</strong> <%= @restaurant.address %></p>
-<p><strong>Rating:</strong> <%= @restaurant.rating %></p>
-<p><strong>Phone Number:</strong> <%= @restaurant.phone_number %></p>
-<p><strong>Opening Hours:</strong><br> <%= @restaurant.opening_hours.split(",").join("<br>").html_safe%></p>
-<%# <p><strong>Opening Hours:</strong><br> <%= @restaurant.opening_hours.split(",").join("<br>")%>
-<p><strong>Categories:</strong> <%= @restaurant.categories %></p>
-<p><strong>Price Level:</strong> <%= @restaurant.price_level %></p>
+<p><strong>住所:</strong> <%= @restaurant.address %></p>
+<p><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
+<p><strong>クチコミスコア:</strong> <%= @restaurant.rating %></p>
+<%# <p><strong>価格帯:</strong> <%= @restaurant.price_level %></p>
 <p><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
+<p><strong>Opening Hours:</strong></p>
+<%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+<%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>
 
 <% if @restaurant.image_url.present? %>
     <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
@@ -15,6 +15,6 @@
 
 <% if @restaurant.html_attributions.present? %>
   <div>
-    <%= @restaurant.html_attributions.html_safe %>
+    <p>Source of photo: <%= @restaurant.html_attributions.html_safe %></p>
   </div>
 <% end %>
