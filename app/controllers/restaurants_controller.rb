@@ -55,6 +55,10 @@ class RestaurantsController < ApplicationController
       @restaurant = Restaurant.find(params[:id])
     end
 
+    def bookmarks
+      @bookmark_restaurants = current_user.bookmark_boards.includes(:user).order(created_at: :desc)
+    end
+
   end
 
   private

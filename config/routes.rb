@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'user_sessions/destroy'
 
   resources :users, only: %i[new create]
-  resources :restaurants, only: %i[index show]
+  resources :restaurants, only: %i[index show] do
+    resource :bookmark, only: [:create, :destroy]
+  end
   post 'get_location', to: 'locations#get_location'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
