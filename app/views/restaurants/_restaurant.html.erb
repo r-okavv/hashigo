@@ -21,6 +21,9 @@
           <%= link_to '詳細', restaurant_path(restaurant), class: "btn btn-primary" %>
         </div>
       </div>
+      <div class="absolute top-2 right-2">
+        <%= render 'bookmark_button', restaurant: restaurant %>
+      </div>
     </div>
   </div>
 </div>
