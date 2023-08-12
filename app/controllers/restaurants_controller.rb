@@ -57,7 +57,7 @@ class RestaurantsController < ApplicationController
 
 
     def bookmarks
-      @bookmarked_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
+      @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
     end
 
   end
