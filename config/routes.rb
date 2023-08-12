@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :restaurants, only: %i[index show] do
+    collection do
+      get :bookmarks
+    end
   end
   post 'get_location', to: 'locations#get_location'
   resources :bookmarks, only: %i[create destroy]

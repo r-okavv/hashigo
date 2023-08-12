@@ -1,0 +1,11 @@
+<div class="container mx-auto">
+  <h1 class="text-2xl mb-4">ブックマーク一覧</h1>
+
+  <% if @bookmark_restaurants.present? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <%= render @bookmarked_restaurants %>
+    </div>
+  <% else %>
+    <p>Bookmarkされた店舗はありません</p>
+  <% end %>
+</div>
