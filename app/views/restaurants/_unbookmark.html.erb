@@ -1,0 +1,3 @@
+<%= link_to bookmark_path(current_user.bookmarks.find_by(restaurant_id: restaurant.id)), id: "js-bookmark-button-for-restaurant-#{restaurant.id}", class:"float-right", data: { "turbo-method": :delete } do %>
+    <i class="fa-solid fa-bookmark"></i>
+<% end %>

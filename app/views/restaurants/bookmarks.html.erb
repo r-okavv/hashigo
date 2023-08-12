@@ -1,0 +1,9 @@
+<div class="container mx-auto">
+  <h1 class="text-2xl mb-4">ブックマーク一覧</h1>
+
+  <% if @bookmark_restaurants.present? %>
+        <%= render @bookmark_restaurants %>
+  <% else %>
+    <p>Bookmarkされた店舗はありません</p>
+  <% end %>
+</div>

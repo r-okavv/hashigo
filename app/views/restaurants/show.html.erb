@@ -10,13 +10,16 @@
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
     <%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>
 
-    <% if @restaurant.image_url.present? %>
-        <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
-    <% end %>
+    <%= image_tag (@restaurant.image_url || 'default_image.jpg'), alt: @restaurant.name %>
+    <%# <% if @restaurant.image_url.present? %>
+        <%# <%= image_tag @restaurant.image_url, alt: @restaurant.name %>
+    <%# <% end %>
 
-    <% if @restaurant.html_attributions.present? %>
+<% if @restaurant.html_attributions.present? %>
     <div>
-        <p>Source of photo: <%= @restaurant.html_attributions.html_safe %></p>
+        <%= simple_format("Source of photo: #{@restaurant.html_attributions}") %>
     </div>
-    <% end %>
+<% end %>
+
+<%= link_to 'back', root_path %>
 </div>

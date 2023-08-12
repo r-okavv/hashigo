@@ -1,4 +1,4 @@
-<div data-turbo="false">
+<%# <div data-turbo="false"> %>
 <div class="container mx-auto">
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
@@ -40,10 +40,10 @@
   <div class="mb-6">
     <p>検索結果</p>
   </div>
-  <div class="flex flex-wrap justify-around">
+  <div class="container mx-auto px-4">
     <%= render @restaurants %>
   </div>
-</div>
+<%# </div> %>
 
 
 <script>

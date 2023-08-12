@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  skip_before_action :require_login, only: %i[index show]
+
   def index
     radius = params[:radius] || 50
     # options = {radius: radius.to_i, types: params[:place_type],min_rating: params[:rating],closing_time: params[:closing_time]}
@@ -53,6 +55,11 @@ class RestaurantsController < ApplicationController
 
     def show
       @restaurant = Restaurant.find(params[:id])
+    end
+
+
+    def bookmarks
+      @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
     end
 
   end
