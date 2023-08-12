@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  skip_before_action :require_login, only: %i[index show]
+
   def index
     radius = params[:radius] || 50
     # options = {radius: radius.to_i, types: params[:place_type],min_rating: params[:rating],closing_time: params[:closing_time]}

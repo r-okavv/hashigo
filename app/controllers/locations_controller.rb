@@ -1,5 +1,7 @@
 class LocationsController < ApplicationController
-    def get_location
+  skip_before_action :require_login, only: %i[get_location]
+
+  def get_location
     latitude = params[:latitude]
     longitude = params[:longitude]
     address = ""
