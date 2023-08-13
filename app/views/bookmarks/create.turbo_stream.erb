@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "js-bookmark-button-for-restaurant-#{@restaurant.id}" do %>
+  <%= render 'restaurants/unbookmark', { restaurant: @restaurant } %>
+<% end %>
