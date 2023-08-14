@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
     validates :place_id, presence: true
     validates :name, presence: true
+    has_many :bookmarks
     validates :latitude, presence: true
     validates :longitude, presence: true
 
@@ -31,5 +32,9 @@ class Restaurant < ApplicationRecord
           }
         restaurant.save
         restaurant
-      end
+    end
+
+    def bookmark_count
+        bookmarks.count
+    end
 end

@@ -4,6 +4,7 @@
     <li><strong>住所:</strong> <%= @restaurant.address %></p>
     <li><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
     <li><strong>クチコミスコア:</strong> <%= @restaurant.rating %></p>
+    <p>ブックマーク数: <%= @restaurant.bookmark_count %></p>
     <%# <p><strong>価格帯:</strong> <%= @restaurant.price_level %></p>
     <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
     <li><strong>Opening Hours:</strong></p>
