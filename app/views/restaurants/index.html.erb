@@ -4,6 +4,7 @@
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
     <div class="mb-6">
       <button type="button" id="get-location" class="btn">現在地を取得</button>
+      <p>※現在地取得ボタンが反応しない場合はお手数ですがReloadしてから再度クリックをお願いします...</p>
     </div>
     <div class="mb-6">
       <%= f.label :address, '住所' %>
@@ -18,8 +19,6 @@
     <div class="mb-6">
       <%= f.label :place_type, 'Bar'%>
       <%= f.radio_button :place_type, 'bar'  %>
-      <%= f.label :place_type, 'Pub' %>
-      <%= f.radio_button :place_type, 'pub' %>
       <%= f.label :place_type, 'Restaurant' %>
       <%= f.radio_button :place_type, 'restaurant' %>
     </div>
