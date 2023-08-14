@@ -39,7 +39,14 @@ class RestaurantsController < ApplicationController
                     []
                   end
 
-    places_data.map { |place_data| find_or_create_restaurant(place_data) }
+    @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
+
+    # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
+    if search_params[:rating].present?
+      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+    end
+
+    @restaurants
   end
 
   def search_options

@@ -23,9 +23,9 @@
       <%= f.radio_button :place_type, 'restaurant' %>
     </div>
 
-    <div class="mb-6">
-      <%= f.label :rating, 'クチコミスコア(工事中)'%>
-      <%= f.select :rating, [['3以上', 3], ['4以上', 4], ['5以上', 5]], {}, {class: 'select select-bordered'} %>
+      <div class="mb-6">
+      <%= f.label :rating, "クチコミスコア" %>
+      <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], include_blank: false %>
     </div>
     <%# <div class="mb-6"> %>
       <%# <%= f.label :closing_time, '閉店時間' %>
