@@ -1,5 +1,5 @@
 <%# <div data-turbo="false"> %>
-<div class="container mx-auto">
+<div class="container mx-auto px-4">
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
     <div class="mb-6">
@@ -8,13 +8,13 @@
     </div>
     <div class="mb-6">
       <%= f.label :address, '住所' %>
-      <%= f.text_field :address, id: 'address', class:"input input-bordered" %>
+      <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
       <%= f.hidden_field :latitude, id: 'latitude' %>
       <%= f.hidden_field :longitude, id: 'longitude' %>
     </div>
     <div class="mb-6">
       <%= f.label :radius, '検索範囲（メートル）' %>
-      <%= f.number_field :radius, value: 50, min: 10, step: 10 %>
+      <%= f.number_field :radius, value: params[:radius]|| 50, min: 10, step: 10 %>
     </div>
     <div class="mb-6">
       <%= f.label :place_type, 'Bar'%>
@@ -25,7 +25,7 @@
 
       <div class="mb-6">
       <%= f.label :rating, "クチコミスコア" %>
-      <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], include_blank: false %>
+      <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
     </div>
     <%# <div class="mb-6"> %>
       <%# <%= f.label :closing_time, '閉店時間' %>
@@ -39,7 +39,7 @@
   <div class="mb-6">
     <p>検索結果</p>
   </div>
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto">
     <%= render @restaurants %>
   </div>
 <%# </div> %>
