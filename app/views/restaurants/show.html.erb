@@ -1,5 +1,8 @@
 <div class="container mx-auto px-4">
-    <h1><strong><%= @restaurant.name %></strong></h1>
+    <div class="flex items-center justify-between">
+        <h1><strong><%= @restaurant.name %></strong></h1>
+        <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+    </div>
 
     <li><strong>住所:</strong> <%= @restaurant.address %></p>
     <li><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
@@ -23,4 +26,11 @@
 <% end %>
 
 <%= link_to 'back', root_path %>
+
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  LineIt.loadButton();
+});
+</script>
 </div>
