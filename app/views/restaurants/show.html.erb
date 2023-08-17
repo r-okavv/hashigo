@@ -1,5 +1,10 @@
 <div class="container mx-auto px-4">
-    <h1><strong><%= @restaurant.name %></strong></h1>
+    <div class="flex items-center justify-between">
+        <h1><strong><%= @restaurant.name %></strong></h1>
+        <%= link_to "https://social-plugins.line.me/lineit/share?url=#{request.original_url}", target: "_blank" do %>
+            <%= image_tag "https://d.line-scdn.net/r/web/social-plugin/img/common/lineit_logo_32x32.png", alt: "LINEで送る" %>
+        <% end %>
+    </div>
 
     <li><strong>住所:</strong> <%= @restaurant.address %></p>
     <li><strong>電話番号：</strong> <%= @restaurant.phone_number %></p>
@@ -23,4 +28,11 @@
 <% end %>
 
 <%= link_to 'back', root_path %>
+
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  LineIt.loadButton();
+});
+</script>
 </div>
