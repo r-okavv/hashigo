@@ -1,7 +1,8 @@
 class Restaurant < ApplicationRecord
+    acts_as_taggable_on :tags
+    has_many :bookmarks
     validates :place_id, presence: true
     validates :name, presence: true
-    has_many :bookmarks
     validates :latitude, presence: true
     validates :longitude, presence: true
 

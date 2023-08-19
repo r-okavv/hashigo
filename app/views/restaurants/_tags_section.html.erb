@@ -1,0 +1,17 @@
+<div id="tags-section">
+    <% if restaurant.tags.present? %>
+        <% restaurant.tags.each do |tag| %>
+            <div class="badge badge-info gap-2">
+            <%= tag.name %>
+            <%= link_to remove_tag_restaurant_path(restaurant, tag_name: tag.name), data: { turbo: true, turbo_method: :delete } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <% end %>
+            </div>
+        <% end %>
+        <%= link_to 'タグ編集', tags_restaurant_path(restaurant), class: "btn btn-xs btn-accent" , data: { turbo: true, turbo_frame: "tags-section" } %>
+    <% else %>
+        <%= link_to 'タグを登録する', tags_restaurant_path(restaurant), class: "btn btn-xs btn-accent" , data: { turbo: true, turbo_frame: "tags-section" } %>
+    <% end %>
+</div>

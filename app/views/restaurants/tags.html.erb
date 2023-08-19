@@ -1,0 +1,10 @@
+<%= turbo_frame_tag 'tags-section' do %>
+  <%= form_with model: @restaurant, url: tags_restaurant_path(@restaurant), method: :patch, data: { turbo: true } do |f| %>
+    <div>
+      <%= f.label :tag_list, "タグ入力欄" %>
+      <%= f.text_field :tag_list, value: @restaurant.tag_list.to_s, placeholder: "Enter tags separated with commas.", class: "input input-bordered input-xs w-full max-w-xs"  %>
+    </div>
+    <%= f.submit @restaurant.tags.present? ? "更新" : "追加", class: "btn btn-xs btn-accent" %>
+    <%= link_to 'キャンセル', @restaurant, class: "btn btn-xs btn-outline btn-secondary" %>
+  <% end %>
+<% end %>
