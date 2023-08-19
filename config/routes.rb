@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get :tags
       patch :tags, action: :update_tags
       post :add_tag
-      post :remove_tag
+      delete :remove_tag
     end
   end
   post 'get_location', to: 'locations#get_location'
