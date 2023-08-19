@@ -8,17 +8,10 @@
     <li><strong>電話番号：</strong> <%= @restaurant.phone_number %>
     <li><strong>クチコミスコア:</strong> <%= @restaurant.rating %>
     <li><strong>ブックマーク数:</strong> <%= @restaurant.bookmark_count %>
-    <li><strong>タグ：</strong>
-    <div id="tags">
-        <% if @restaurant.tags.present? %>
-          <% @restaurant.tags.each do |tag| %>
-            <%= tag.name %>
-            <%= link_to '削除', remove_tag_restaurant_path(@restaurant, tag_name: tag.name), method: :post %>
-          <% end %>
-        <% else %>
-          <%= link_to 'タグを登録する', add_tag_restaurant_path(@restaurant)%>
-        <% end %>
-        </div>
+    <li><strong>タグ：</strong></p>
+    <%= turbo_frame_tag 'tags-section' do %>
+        <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
+    <% end %>
     <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
     <li><strong>Opening Hours:</strong></p>
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>

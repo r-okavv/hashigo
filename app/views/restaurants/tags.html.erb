@@ -1,0 +1,10 @@
+<%= turbo_frame_tag 'tags-section' do %>
+  <%= form_with model: @restaurant, url: tags_restaurant_path(@restaurant), method: :patch, data: { turbo: true } do |f| %>
+    <div>
+      <%= f.label :tag_list, "タグを編集" %>
+      <%= f.text_field :tag_list, value: @restaurant.tag_list.to_s %>
+    </div>
+    <%= f.submit @restaurant.tags.present? ? "更新" : "追加" %>
+    <%= link_to 'キャンセル', @restaurant %>
+  <% end %>
+<% end %>

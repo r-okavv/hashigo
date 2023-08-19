@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       get :bookmarks
     end
     member do
+      get :tags
+      patch :tags, action: :update_tags
       post :add_tag
       post :remove_tag
     end

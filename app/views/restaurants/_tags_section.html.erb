@@ -1,0 +1,11 @@
+<div id="tags-section">
+    <% if restaurant.tags.present? %>
+        <% restaurant.tags.each do |tag| %>
+            <%= tag.name %>
+            <%= link_to '削除', remove_tag_restaurant_path(restaurant, tag_name: tag.name), method: :post, data: { turbo: true } %>
+        <% end %>
+        <%= link_to 'タグ編集', tags_restaurant_path(restaurant), data: { turbo: true, turbo_frame: "tags-section" } %>
+    <% else %>
+        <%= link_to 'タグを登録する', tags_restaurant_path(restaurant), data: { turbo: true, turbo_frame: "tags-section" } %>
+    <% end %>
+</div>

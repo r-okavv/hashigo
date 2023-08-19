@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   skip_before_action :require_login, only: %i[index show]
   before_action :set_google_client
+  before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
 
   def index
     @restaurants = fetch_restaurants
@@ -10,24 +11,46 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
+
+
+  # def new_tags; end
+  
+  # def edit_tags; end
+
+  def tags; end
+  
   def add_tag
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.tag_list.add(params[:tag_name])
     @restaurant.save
   end
 
   def remove_tag
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.tag_list.remove(params[:tag_name])
     @restaurant.save
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @restaurant }
+    end
   end
 
-  
+  def update_tags
+    @restaurant.tag_list = params[:restaurant][:tag_list]
+    @restaurant.save
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @restaurant }
+    end
+  end
+
   def bookmarks
     @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
   end
 
   private
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:id])
+  end
 
   def set_google_client
     @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
