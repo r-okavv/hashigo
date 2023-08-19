@@ -10,7 +10,19 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
+  def add_tag
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.tag_list.add(params[:tag_name])
+    @restaurant.save
+  end
 
+  def remove_tag
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.tag_list.remove(params[:tag_name])
+    @restaurant.save
+  end
+
+  
   def bookmarks
     @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
   end

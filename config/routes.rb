@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     collection do
       get :bookmarks
     end
+    member do
+      post :add_tag
+      post :remove_tag
+    end
   end
   post 'get_location', to: 'locations#get_location'
   resources :bookmarks, only: %i[create destroy]
