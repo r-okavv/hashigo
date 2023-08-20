@@ -1,6 +1,6 @@
 <turbo-stream action="replace" target="tags-section">
-  <template>
-    <% if @restaurant.tags.present? %>
+	<template>
+  	<% if @restaurant.tags.present? %>
       <% @restaurant.tags.each do |tag| %>
         <%= tag.name %>
         <%= link_to '削除', remove_tag_restaurant_path(@restaurant, tag_name: tag.name), data: { turbo: true, turbo_method: :delete } %>

@@ -21,6 +21,8 @@ AllCops:
     - "lib/tasks/auto_annotate_models.rake"
     - "config/environments/*"
     - "config/puma.rb"
+    - "config/initializers/geocoder.rb"
+    - "spec/rails_helper.rb"
 
 # 1行あたりの文字数をチェックする
 Layout/LineLength:
@@ -91,3 +93,7 @@ Style/FrozenStringLiteralComment:
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
   MinNameLength: 1
+
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
