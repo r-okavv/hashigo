@@ -14,11 +14,12 @@ class RestaurantsController < ApplicationController
 
 
   # def new_tags; end
-  
+
   # def edit_tags; end
 
-  def tags; end
-  
+  def tags
+  end
+
   def add_tag
     @restaurant.tag_list.add(params[:tag_name])
     @restaurant.save
