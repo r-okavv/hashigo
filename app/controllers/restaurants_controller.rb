@@ -54,7 +54,7 @@ class RestaurantsController < ApplicationController
   end
 
   def set_google_client
-    @client = GooglePlaces::Client.new(ENV.fetch('GOOGLE_API_KEY', nil))
+    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
   end
 
   def search_params
