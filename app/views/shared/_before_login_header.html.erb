@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 bg-cyan-600">
+<div class="navbar bg-base-100 bg-blue-900">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -34,7 +34,8 @@
       </li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <%= link_to 'Login', login_path, class: 'btn'%>
-  </div>
+<div class="navbar-end flex">
+    <%= link_to 'Signup', new_user_path, class: 'bg-transparent hover:bg-blue-500 text-neutral-50 font-semibold hover:text-neutral-50 py-4 px-4 border border-neutral-50 hover:border-transparent rounded-full mr-4' %>
+    <%= link_to 'Login', login_path, class: 'btn rounded-full' %>
+</div>
 </div>
