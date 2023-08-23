@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-100 bg-cyan-600">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -17,16 +17,16 @@
         <li><a>Item 3（工事中）</a></li>
       </ul>
     </div>
-    <%= link_to 'HASHIGO', root_path,class:"btn btn-ghost normal-case text-xl" %>
+    <%= link_to 'HASHIGO', root_path,class:"btn btn-ghost normal-case text-xl text-neutral-50" %>
   </div>
-  <div class="navbar-center hidden lg:flex">
+  <div class="navbar-center hidden lg:flex text-neutral-50">
     <ul class="menu menu-horizontal px-1">
       <li><%= link_to 'Bookmarks', bookmarks_restaurants_path %></li>
       <li><a>Browsing history（工事中）</a></li>
       <li tabindex="0">
         <details>
           <summary>Menu3（工事中）</summary>
-          <ul class="p-2">
+          <ul class="p-2 bg-cyan-600">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
