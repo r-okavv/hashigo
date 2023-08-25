@@ -13,6 +13,7 @@ class RestaurantsController < ApplicationController
 
 
 
+
   # def new_tags; end
 
   # def edit_tags; end

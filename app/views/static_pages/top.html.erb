@@ -1,21 +1,19 @@
-<div data-turbo="false">
-<div class="container mx-auto flex justify-center items-center">
-  <div class="sm:col-span-2 p-3.5">
-      <p class="mt-2 p-3.5 text-info font-serif text-xl font-bold text-center">
-        もう二軒目探しに迷わない<br>
-        HASHIGOでサッと手軽に二軒目のお店を探しましょう<br>
-      </p>
-    <div class="form-control flex justify-center">
-        <label class="label">
-            <span class="label-text">Enter address</span>
-            <span class="label-text-alt">Top Right label</span>
-        </label>
-        <input type="text" placeholder="Search from current location or enter address" class="input input-bordered" />
-        <label class="label">
-            <span class="label-text-alt">Bottom Left label</span>
-            <span class="label-text-alt">Bottom Right label</span>
-        </label>
+<%# <div data-turbo="false"> %>
+<div class="bg-cyan-800">
+  <div class="hero min-h-screen" style="background-image: url('<%= asset_path 'Top3.png' %>');">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="mb-5 text-4xl font-bold">
+        二軒目選び、もう悩まない。<br>
+        HASHIGOで手軽に、迅速に、最適なお店を見つけよう。<br></h1>
+      <p class="mb-5">
+          HASHIGOは、飲み会の二次会先を迅速に選ぶサポートアプリ。<br>
+          近くの高評価店舗を即座に絞り込み、並び替えや投票機能で簡単に次のスポットを決められます。<br>
+          今すぐHASHIGOを使って、スムーズなお店選びを体験しましょう! <br></p>
+        <%= link_to 'Get started', login_path, class:'btn glass rounded-full mb-12' %>
     </div>
   </div>
+  </div>
 </div>
-</div>
+<%# </div> %>
