@@ -1,14 +1,16 @@
 <%# <div data-turbo="false"> %>
-<div class="bg-cover bg-center" style="background-image: url('<%= asset_path 'Top6.png' %>')">
-  <div class="container mx-auto flex flex-col justify-center items-center">
-    <div class="sm:col-span-2 p-3.5 mt-8">
-        <p class="mt-2 p-3.5 font-sans text-neutral-50 text-xl font-bold text-center">
-          二軒目選び、もう悩まない。<br>
-          HASHIGOで手軽に、迅速に、最適なお店を見つけよう。<br>
-        </p>
-    </div>
-    <div>
-      <button class="btn glass rounded-full mb-12"><strong>Get started</button>
+<div class="bg-cyan-800">
+  <div class="bg-cover bg-center bg-no-repeat" style="background-image: url('<%= asset_path 'Top8.png' %>')">
+    <div class="container mx-auto flex flex-col justify-center items-center">
+      <div class="sm:col-span-2 p-3.5 mt-8">
+          <p class="mt-2 p-3.5 font-sans text-stone-100 text-xl font-bold text-center">
+            二軒目選び、もう悩まない。<br>
+            HASHIGOで手軽に、迅速に、最適なお店を見つけよう。<br>
+          </p>
+      </div>
+      <div>
+        <%= link_to 'Get started', login_path, class:'btn glass rounded-full mb-12' %>
+      </div>
     </div>
   </div>
 </div>

@@ -10,6 +10,12 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
   end
+  
+  def search_from_address
+  end
+
+  def search_from_current_location
+  end
 
 
 
