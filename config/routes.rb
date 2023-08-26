@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   resources :restaurants, only: %i[index show] do
     collection do
+      get :search
+      get :address_search
       get :bookmarks
     end
     member do

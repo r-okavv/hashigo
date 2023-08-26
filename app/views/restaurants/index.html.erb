@@ -1,4 +1,8 @@
 <div class="container mx-auto px-4">
+  <div class="mt-4">
+    <%= link_to '現在地から検索', search_restaurants_path, class: 'btn btn-primary' %>
+    <%= link_to '住所を入力して検索', address_search_restaurants_path, class: 'btn btn-secondary' %>
+  </div>
 
   <%= form_with url: restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
     <div class="mb-6">
