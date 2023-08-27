@@ -4,7 +4,6 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
 
   def index
-    @restaurants = fetch_restaurants
   end
 
   def show
@@ -12,11 +11,11 @@ class RestaurantsController < ApplicationController
   end
 
   def search
-
+    @restaurants = fetch_restaurants
   end
 
   def address_search
-    
+    @restaurants = fetch_restaurants_from_addess
   end
 
 
@@ -77,7 +76,22 @@ class RestaurantsController < ApplicationController
   def fetch_restaurants
     places_data = if params[:latitude].present? && params[:longitude].present?
                     @client.spots(params[:latitude], params[:longitude], search_options).first(20)
-                  elsif params[:address].present?
+                  else
+                    []
+                  end
+
+    @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
+
+    # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
+    if search_params[:rating].present?
+      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+    end
+
+    @restaurants
+  end
+
+  def fetch_restaurants_from_addess
+    places_data = if params[:address].present?
                     location = Geocoder.search(params[:address]).first
                     location ? @client.spots(location.latitude, location.longitude, search_options).first(20) : []
                   else
@@ -86,7 +100,6 @@ class RestaurantsController < ApplicationController
 
     @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
 
-    # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
     if search_params[:rating].present?
       @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
