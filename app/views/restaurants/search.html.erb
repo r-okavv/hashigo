@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4">
   <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
-    <div class="mb-6">
+    <div class="mb-6 mt-6">
       <button type="button" id="get-location" class="btn">現在地を取得</button>
       <p>※現在地取得ボタンが反応しない場合はお手数ですがReloadしてから再度クリックをお願いします...</p>
     </div>
@@ -34,6 +34,7 @@
     </div>
   <% end %>
 
+  <% if @restaurants.present? %>
   <div class="flex justify-between items-center mb-6">
     <p class="text-lg">検索結果</p>
     <div>
@@ -48,6 +49,7 @@
   <div class="container mx-auto", id="restaurant-list">
     <%= render @restaurants %>
   </div>
+<% end %>
 <%# </div> %>
 
 

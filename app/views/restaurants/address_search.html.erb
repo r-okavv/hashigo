@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4">
   <%= form_with url: address_search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
-    <div class="mb-6">
+    <div class="mb-6 mt-6">
       <%= f.label :address, '住所' %>
       <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
       <%= f.hidden_field :latitude, id: 'latitude' %>
@@ -30,6 +30,7 @@
     </div>
   <% end %>
 
+<% if @restaurants.present? %>
   <div class="flex justify-between items-center mb-6">
     <p class="text-lg">検索結果</p>
     <div>
@@ -44,6 +45,7 @@
   <div class="container mx-auto", id="restaurant-list">
     <%= render @restaurants %>
   </div>
+<% end %>
 <%# </div> %>
 
 
