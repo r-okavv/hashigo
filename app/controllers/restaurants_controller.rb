@@ -19,7 +19,7 @@ class RestaurantsController < ApplicationController
   end
 
   def address_search
-    @restaurants = fetch_restaurants_from_addess
+    @restaurants = fetch_restaurants_from_address
   end
 
 
@@ -66,74 +66,54 @@ class RestaurantsController < ApplicationController
   end
 
   def search_params
-    params.permit(:radius, :place_type, :rating, :closing_time, :latitude, :longitude, :address)
+    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address)
   end
 
   def find_or_create_restaurant(place_data)
     Restaurant.find_or_create_from_api_data(place_data)
   end
 
+
   def fetch_restaurants
-    # NearBySearchのエンドポイントURL
-    base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-  
-    # リクエストのパラメータを設定
-    parameters = {
-      location: "#{params[:latitude]},#{params[:longitude]}",
-      radius: search_params[:radius] || 50,
-      type: search_params[:place_type],
-      key: ENV['GOOGLE_API_KEY'],
-      language: 'ja'
-    }
-  
-    # パラメータをURLにエンコードして結合
-    url = base_url + parameters.to_query
-  
-    # HTTPリクエストを行い、レスポンスを取得
-    response = Net::HTTP.get(URI(url))
-    results = JSON.parse(response)["results"]
-  
-    # レスポンスからレストランのデータを取得または作成
-    @restaurants = results.map { |place_data| find_or_create_restaurant(place_data) }
-  
-    # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
-    if search_params[:rating].present?
-      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+    if params[:latitude] && params[:longitude]
+      location = "#{params[:latitude]},#{params[:longitude]}"
+      # 現在地から取得の場合は現在営業中の店舗のみを検索
+      fetch_places_from_api(location, opennow: true)
+    else
+      return []
     end
-  
-    @restaurants
   end
 
-  def fetch_restaurants_from_addess
+  def fetch_restaurants_from_address
     location = Geocoder.search(params[:address]).first if params[:address].present?
 
     if location.nil? || location.latitude.nil? || location.longitude.nil?
       return []
     end
 
+    fetch_places_from_api("#{location.latitude},#{location.longitude}")
+  end
+
+
+  def fetch_places_from_api(location, options = {})
     base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-  
     parameters = {
-      location: "#{location.latitude},#{location.longitude}",
+      location: location,
       radius: search_params[:radius] || 50,
       type: search_params[:place_type],
       key: ENV['GOOGLE_API_KEY'],
       language: 'ja'
-    }
-  
-    url = base_url + parameters.to_query
+    }.merge(options)
 
+    url = base_url + parameters.to_query
     response = Net::HTTP.get(URI(url))
     results = JSON.parse(response)["results"]
-  
-    @restaurants = results.map { |place_data| find_or_create_restaurant(place_data) }
 
+    restaurants = results.map { |place_data| find_or_create_restaurant(place_data) }
     if search_params[:rating].present?
-      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+      restaurants.select! { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
-  
-    @restaurants
-
+    restaurants
   end
 
 end

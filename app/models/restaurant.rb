@@ -39,7 +39,7 @@ class Restaurant < ApplicationRecord
         image_url: photo_url,
         html_attributions: html_attributions,
         url: details['url'],
-        # opening_hours: details['opening_hours'] ? (details['opening_hours']['open_now'] ? 'Open Now' : 'Closed') : "N/A"
+        opening_hours: details['opening_hours'] ? details['opening_hours']["weekday_text"].join(", ") : "N/A"
       }
     restaurant.save
     restaurant
