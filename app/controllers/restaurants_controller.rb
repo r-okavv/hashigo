@@ -1,6 +1,10 @@
 class RestaurantsController < ApplicationController
+  require 'net/http'
+  require 'uri'
+  require 'json'
+
   skip_before_action :require_login, only: %i[index show]
-  before_action :set_google_client
+  # before_action :set_google_client
   before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
 
   def index
@@ -15,7 +19,7 @@ class RestaurantsController < ApplicationController
   end
 
   def address_search
-    @restaurants = fetch_restaurants_from_addess
+    @restaurants = fetch_restaurants_from_address
   end
 
 
@@ -61,65 +65,55 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
-  def set_google_client
-    @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
-  end
-
   def search_params
-    params.permit(:radius, :place_type, :rating, :closing_time, :latitude, :longitude, :address)
+    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address)
   end
 
   def find_or_create_restaurant(place_data)
     Restaurant.find_or_create_from_api_data(place_data)
   end
 
+
   def fetch_restaurants
-    places_data = if params[:latitude].present? && params[:longitude].present?
-                    @client.spots(params[:latitude], params[:longitude], search_options).first(20)
-                  else
-                    []
-                  end
+    if params[:latitude] && params[:longitude]
+      location = "#{params[:latitude]},#{params[:longitude]}"
+      # 現在地から取得の場合は現在営業中の店舗のみを検索
+      fetch_places_from_api(location, opennow: true)
+    else
+      return []
+    end
+  end
 
-    @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
+  def fetch_restaurants_from_address
+    location = Geocoder.search(params[:address]).first if params[:address].present?
 
-    # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
-    if search_params[:rating].present?
-      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+    if location.nil? || location.latitude.nil? || location.longitude.nil?
+      return []
     end
 
-    @restaurants
+    fetch_places_from_api("#{location.latitude},#{location.longitude}")
   end
 
-  def fetch_restaurants_from_addess
-    places_data = if params[:address].present?
-                    location = Geocoder.search(params[:address]).first
-                    location ? @client.spots(location.latitude, location.longitude, search_options).first(20) : []
-                  else
-                    []
-                  end
 
-    @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
+  def fetch_places_from_api(location, options = {})
+    base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+    parameters = {
+      location: location,
+      radius: search_params[:radius] || 50,
+      type: search_params[:place_type],
+      key: ENV['GOOGLE_API_KEY'],
+      language: 'ja'
+    }.merge(options)
 
+    url = base_url + parameters.to_query
+    response = Net::HTTP.get(URI(url))
+    results = JSON.parse(response)["results"]
+
+    restaurants = results.map { |place_data| find_or_create_restaurant(place_data) }
     if search_params[:rating].present?
-      @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
+      restaurants.select! { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
-
-    @restaurants
-  end
-
-  def search_options
-    radius = params[:radius] || 50
-    {
-      language: 'ja',
-      radius: radius.to_i,
-      types: params[:place_type],
-      closing_time: params[:closing_time],
-      detail: true
-    }
-  end
-
-  def search_params
-    params.permit(:radius, :place_type, :rating, :closing_time, :latitude, :longitude, :address)
+    restaurants
   end
 
 end
