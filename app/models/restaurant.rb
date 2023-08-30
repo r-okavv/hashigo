@@ -25,14 +25,13 @@ class Restaurant < ApplicationRecord
       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo['photo_reference']}&key=#{ENV.fetch('GOOGLE_API_KEY', nil)}"
       html_attributions = photo['html_attributions'].first
     end
-  
-    binding.pry
+
     restaurant.attributes = {
         place_id: details['place_id'],
         name: details['name'],
         latitude: details['geometry']['location']['lat'],
         longitude: details['geometry']['location']['lng'],
-        address: details['vicinity'],
+        address: details['formatted_address'] || details['vicinity'],
         rating: details['rating'],
         phone_number: details['formatted_phone_number'],
         categories: details['types'],
@@ -40,7 +39,7 @@ class Restaurant < ApplicationRecord
         image_url: photo_url,
         html_attributions: html_attributions,
         url: details['url'],
-        opening_hours: details['opening_hours'] ? (details['opening_hours']['open_now'] ? 'Open Now' : 'Closed') : "N/A"
+        # opening_hours: details['opening_hours'] ? (details['opening_hours']['open_now'] ? 'Open Now' : 'Closed') : "N/A"
       }
     restaurant.save
     restaurant
@@ -51,7 +50,8 @@ class Restaurant < ApplicationRecord
     parameters = {
       place_id: place_id,
       fields: 'place_id,name,geometry,formatted_phone_number,vicinity,rating,types,price_level,photos,url,opening_hours',
-      key: ENV.fetch('GOOGLE_API_KEY', nil)
+      key: ENV.fetch('GOOGLE_API_KEY', nil),
+      language: 'ja'
     }
     response = Net::HTTP.get(URI("#{base_url}?#{parameters.to_query}"))
     JSON.parse(response)['result']

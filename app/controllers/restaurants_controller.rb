@@ -65,10 +65,6 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
-  # def set_google_client
-  #   @client = GooglePlaces::Client.new(ENV['GOOGLE_API_KEY'])
-  # end
-
   def search_params
     params.permit(:radius, :place_type, :rating, :closing_time, :latitude, :longitude, :address)
   end
@@ -76,23 +72,6 @@ class RestaurantsController < ApplicationController
   def find_or_create_restaurant(place_data)
     Restaurant.find_or_create_from_api_data(place_data)
   end
-
-  # def fetch_restaurants
-  #   places_data = if params[:latitude].present? && params[:longitude].present?
-  #                   @client.spots(params[:latitude], params[:longitude], search_options).first(20)
-  #                 else
-  #                   []
-  #                 end
-
-  #   @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
-
-  #   # rating パラメータが存在する場合、その値以上の評価を持つレストランのみをフィルタリング
-  #   if search_params[:rating].present?
-  #     @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
-  #   end
-
-  #   @restaurants
-  # end
 
   def fetch_restaurants
     # NearBySearchのエンドポイントURL
@@ -126,35 +105,35 @@ class RestaurantsController < ApplicationController
   end
 
   def fetch_restaurants_from_addess
-    places_data = if params[:address].present?
-                    location = Geocoder.search(params[:address]).first
-                    location ? @client.spots(location.latitude, location.longitude, search_options).first(20) : []
-                  else
-                    []
-                  end
+    location = Geocoder.search(params[:address]).first if params[:address].present?
 
-    @restaurants = places_data.map { |place_data| find_or_create_restaurant(place_data) }
+    if location.nil? || location.latitude.nil? || location.longitude.nil?
+      return []
+    end
+
+    base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+  
+    parameters = {
+      location: "#{location.latitude},#{location.longitude}",
+      radius: search_params[:radius] || 50,
+      type: search_params[:place_type],
+      key: ENV['GOOGLE_API_KEY'],
+      language: 'ja'
+    }
+  
+    url = base_url + parameters.to_query
+
+    response = Net::HTTP.get(URI(url))
+    results = JSON.parse(response)["results"]
+  
+    @restaurants = results.map { |place_data| find_or_create_restaurant(place_data) }
 
     if search_params[:rating].present?
       @restaurants = @restaurants.select { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
-
+  
     @restaurants
+
   end
-
-  # def search_options
-  #   radius = params[:radius] || 50
-  #   {
-  #     language: 'ja',
-  #     radius: radius.to_i,
-  #     types: params[:place_type],
-  #     closing_time: params[:closing_time],
-  #     detail: true
-  #   }
-  # end
-
-  # def search_params
-  #   params.permit(:radius, :place_type, :rating, :closing_time, :latitude, :longitude, :address)
-  # end
 
 end
