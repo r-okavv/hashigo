@@ -25,6 +25,10 @@
       <%= f.label :rating, "クチコミスコア" %>
       <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
     </div>
+    <%# <div class="mb-6"> %>
+      <%# <%= f.label :closing_time, '閉店時間' %>
+      <%# <%= f.range_field :closing_time, value: 22, min: 0, max: 24, step: 1 %>
+    <%# </div> %>
     <div class="mb-6">
       <%= f.submit '検索', id: 'search-address',class:'btn' %>
     </div>
@@ -50,7 +54,7 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   const getLocationButton = document.getElementById('get-location');
   const searchButton = document.getElementById('search-address');
 
