@@ -79,7 +79,7 @@ gem 'rails-i18n'
 gem 'sorcery'
 gem "dockerfile-rails", ">= 1.5", :group => :development
 gem 'dotenv-rails'
-gem 'google_places'
 gem 'geocoder'
 gem 'gon'
 gem 'acts-as-taggable-on', '~> 9.0'
+gem 'kaminari'
