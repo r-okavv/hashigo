@@ -15,11 +15,13 @@ class RestaurantsController < ApplicationController
   end
 
   def search
-    @restaurants = fetch_restaurants
+    restaurants_array = fetch_restaurants
+    @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
   def address_search
-    @restaurants = fetch_restaurants_from_address
+    restaurants_array = fetch_restaurants_from_address
+    @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
 
@@ -56,7 +58,7 @@ class RestaurantsController < ApplicationController
   end
 
   def bookmarks
-    @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc)
+    @bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc).page(params[:page])
   end
 
   private

@@ -45,6 +45,9 @@
   <div class="container mx-auto", id="restaurant-list">
     <%= render @restaurants %>
   </div>
+  <div class="mt-4 mb-6 text-center">
+    <%= paginate @restaurants %>
+  </div>
 <% end %>
 <%# </div> %>
 
