@@ -24,7 +24,11 @@ class RestaurantsController < ApplicationController
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
-
+  def random_select
+    selected_restaurants = Restaurant.where(id: params[:selected_restaurants])
+    @random_restaurant = selected_restaurants.sample
+    redirect_to restaurant_path(@random_restaurant)
+  end
 
 
   # def new_tags; end

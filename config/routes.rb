@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       delete :remove_tag
     end
   end
+  post 'select_restaurants', to: 'restaurants#random_select', as: 'select_restaurants'
   post 'get_location', to: 'locations#get_location'
   resources :bookmarks, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
