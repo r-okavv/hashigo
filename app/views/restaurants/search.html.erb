@@ -55,6 +55,7 @@
     <button id="select-candidate-button" class="btn btn-primary">アプリにおまかせ</button>
     <button id="random-button" class="btn btn-primary hidden">お店を選ぶ</button>
   </div>
+  <p id="instruction" class="mb-4 text-left hidden">候補のお店にチェックを入れて「お店を選択」ボタンをクリックしてください。</p>
   <% end %>
 <%# </div> %>
 
@@ -145,6 +146,7 @@ document.getElementById('sort-options').addEventListener('change', function() {
 
 document.addEventListener('turbo:load', function() {
   const selectCandidateButton = document.getElementById('select-candidate-button');
+  const instruction = document.getElementById('instruction');
   const randomButton = document.getElementById('random-button');
   const checkboxes = document.querySelectorAll('.restaurant-checkbox');
 
@@ -153,6 +155,7 @@ document.addEventListener('turbo:load', function() {
       checkboxes.forEach(checkbox => {
         checkbox.classList.remove('hidden');
       });
+      instruction.classList.remove('hidden'); 
       selectCandidateButton.classList.add('hidden');
       randomButton.classList.remove('hidden');
     });
