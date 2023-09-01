@@ -14,7 +14,7 @@
   <% end %>
   <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
   <% if @restaurant.opening_hours %>
-    <li><strong>Opening Hours:</strong></p>
+    <li><strong>営業時間:</strong></p>
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
   <% end %>
     <%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>

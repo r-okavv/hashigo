@@ -51,8 +51,11 @@
   <div class="mt-4 mb-6 text-center">
     <%= paginate @restaurants %>
   </div>
-
-  <button id="random-choice-btn" class="btn btn-secondary">アプリにおまかせ</button>
+  <div class="mt-4 mb-6 text-center">
+    <button id="select-candidate-button" class="btn btn-primary">アプリにおまかせ</button>
+    <button id="random-button" class="btn btn-primary hidden">お店を選ぶ</button>
+  </div>
+  <% end %>
 <%# </div> %>
 
 
@@ -138,6 +141,22 @@ document.getElementById('sort-options').addEventListener('change', function() {
   sortedRestaurants.forEach(restaurant => {
     restaurantList.appendChild(restaurant);
   });
+});
+
+document.addEventListener('turbo:load', function() {
+  const selectCandidateButton = document.getElementById('select-candidate-button');
+  const randomButton = document.getElementById('random-button');
+  const checkboxes = document.querySelectorAll('.restaurant-checkbox');
+
+  if (selectCandidateButton) {
+    selectCandidateButton.addEventListener('click', function() {
+      checkboxes.forEach(checkbox => {
+        checkbox.classList.remove('hidden');
+      });
+      selectCandidateButton.classList.add('hidden');
+      randomButton.classList.remove('hidden');
+    });
+  }
 });
 </script>
 </div>
