@@ -10,14 +10,6 @@ class Restaurant < ApplicationRecord
     restaurant = find_or_initialize_by(place_id: data['place_id'])
     return restaurant if restaurant.persisted?
 
-    # if data.photos.present?
-    #   photo = data['photos'].first
-    #   photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo.photo_reference}&key=#{ENV.fetch(
-    #     'GOOGLE_API_KEY', nil
-    #   )}"
-    #   html_attributions = photo.html_attributions.first
-    # end
-
     details = fetch_place_details(data['place_id'])
 
     if details['photos'].present?

@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
   require 'uri'
   require 'json'
 
-  skip_before_action :require_login, only: %i[index show]
+  skip_before_action :require_login, only: %i[index show search address_search]
   # before_action :set_google_client
   before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
 
@@ -24,7 +24,11 @@ class RestaurantsController < ApplicationController
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
-
+  def random_select
+    selected_restaurants = Restaurant.where(id: params[:selected_restaurants])
+    @random_restaurant = selected_restaurants.sample
+    redirect_to restaurant_path(@random_restaurant)
+  end
 
 
   # def new_tags; end
