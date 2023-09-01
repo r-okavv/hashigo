@@ -48,6 +48,10 @@
   <div class="mt-4 mb-6 text-center">
     <%= paginate @restaurants %>
   </div>
+	<div class="mt-4 mb-6 text-center">
+    <button id="select-candidate-button" class="btn btn-primary">アプリにおまかせ</button>
+    <button id="random-button" class="btn btn-primary hidden">お店を選ぶ</button>
+  </div>
 <% end %>
 <%# </div> %>
 
@@ -136,6 +140,79 @@ document.getElementById('sort-options').addEventListener('change', function() {
   });
 });
 
+document.getElementById('sort-options').addEventListener('change', function() {
+  const sortBy = this.value;
+  const restaurantList = document.getElementById('restaurant-list');
+  const restaurants = Array.from(restaurantList.querySelectorAll('[data-restaurant-container]'));
 
+  let sortedRestaurants;
+
+  switch (sortBy) {
+    case 'rating':
+      sortedRestaurants = restaurants.sort((a, b) => {
+      const aCard = a.querySelector('.card');
+      const bCard = b.querySelector('.card');
+      const aValue = parseFloat(aCard.getAttribute('data-rating'));
+      const bValue = parseFloat(bCard.getAttribute('data-rating'));
+      return bValue - aValue; // 降順
+    });
+  break;
+    case 'bookmarks':
+      sortedRestaurants = restaurants.sort((a, b) => {
+      const aCard = a.querySelector('.card');
+      const bCard = b.querySelector('.card');
+      const aValue = parseFloat(aCard.getAttribute('data-bookmarks'));
+      const bValue = parseFloat(bCard.getAttribute('data-bookmarks'));
+      return bValue - aValue; // 降順
+    });
+  break;
+
+    default:
+      sortedRestaurants = restaurants;
+    }
+
+  sortedRestaurants.forEach(restaurant => {
+    restaurantList.appendChild(restaurant);
+  });
+});
+
+document.addEventListener('turbo:load', function() {
+  const selectCandidateButton = document.getElementById('select-candidate-button');
+  const randomButton = document.getElementById('random-button');
+  const checkboxes = document.querySelectorAll('.restaurant-checkbox');
+
+  if (selectCandidateButton) {
+    selectCandidateButton.addEventListener('click', function() {
+      checkboxes.forEach(checkbox => {
+        checkbox.classList.remove('hidden');
+      });
+      selectCandidateButton.classList.add('hidden');
+      randomButton.classList.remove('hidden');
+    });
+  }
+
+
+  if (randomButton) {
+    randomButton.addEventListener('click', function() {
+      // 選択されたレストランのIDを取得
+      const selectedIds = [];
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          selectedIds.push(checkbox.getAttribute('data-restaurant-id'));
+        }
+      });
+
+      // IDのリストからランダムに1つ選択
+      const randomId = selectedIds[Math.floor(Math.random() * selectedIds.length)];
+
+      // 選択されたレストランの詳細ページにリダイレクト
+      if (randomId) {
+        window.location.href = `/restaurants/${randomId}`;
+      } else {
+        alert('レストランを選択してください');
+      }
+    });
+  }
+});
 </script>
 </div>
