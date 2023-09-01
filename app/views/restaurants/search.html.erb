@@ -157,6 +157,29 @@ document.addEventListener('turbo:load', function() {
       randomButton.classList.remove('hidden');
     });
   }
+
+
+  if (randomButton) {
+    randomButton.addEventListener('click', function() {
+      // 選択されたレストランのIDを取得
+      const selectedIds = [];
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          selectedIds.push(checkbox.getAttribute('data-restaurant-id'));
+        }
+      });
+
+      // IDのリストからランダムに1つ選択
+      const randomId = selectedIds[Math.floor(Math.random() * selectedIds.length)];
+
+      // 選択されたレストランの詳細ページにリダイレクト
+      if (randomId) {
+        window.location.href = `/restaurants/${randomId}`;
+      } else {
+        alert('レストランを選択してください');
+      }
+    });
+  }
 });
 </script>
 </div>

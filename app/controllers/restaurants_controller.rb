@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
   require 'uri'
   require 'json'
 
-  skip_before_action :require_login, only: %i[index show]
+  skip_before_action :require_login, only: %i[index show search address_search]
   # before_action :set_google_client
   before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
 

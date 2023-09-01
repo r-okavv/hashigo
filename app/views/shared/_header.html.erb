@@ -6,12 +6,12 @@
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
       <li><%= link_to 'Bookmarks', bookmarks_restaurants_path %></li>
-        <li><a>Browsing history（工事中）</a></li>
+        <li><a>My reviews（工事中）</a></li>
         <li>
-          <a>Menu（工事中）</a>
+          <a>お店検索</a>
           <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
+            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
+            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
           </ul>
         </li>
         <li><a>Item 3</a></li>
@@ -22,13 +22,13 @@
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 text-neutral-50">
       <li><%= link_to 'Bookmarks', bookmarks_restaurants_path %></li>
-      <li><a>Browsing history（工事中）</a></li>
+      <li><a>My reviews（工事中）</a></li>
       <li tabindex="0">
         <details>
-          <summary>Menu3（工事中）</summary>
+          <summary>お店検索</summary>
           <ul class="p-2 bg-cyan-700">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
+            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
+            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
           </ul>
         </details>
       </li>
