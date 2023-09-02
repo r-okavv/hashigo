@@ -1,13 +1,20 @@
 class RestaurantDecorator < ApplicationDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
+  def price_level_str
+    case object.price_level
+    when 0
+      "無料"
+    when 1
+      "安価"
+    when 2
+      "普通"
+    when 3
+      "高級"
+    when 4
+      "とても高級"
+    else
+      "不明"
+    end
+  end
 end
