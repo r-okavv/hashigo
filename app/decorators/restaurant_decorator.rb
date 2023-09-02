@@ -8,7 +8,7 @@ class RestaurantDecorator < ApplicationDecorator
     when 1
       "安価"
     when 2
-      "普通"
+      "お手頃"
     when 3
       "高級"
     when 4
