@@ -1,28 +1,29 @@
-<div class="bg-cyan-800">
-	<div class="container mx-auto flex justify-center items-center">
-		<div class="w-full max-w-xs">
-			<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-				<div class="mb-6 text-center">
-					<h1>SignUp</h1>
-				</div>
-				<%= form_with model: @user, local: true do |f| %>
-					<div class="mb-6">
-						<%= f.label :email %>
-						<%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+<div class="flex-grow flex items-center justify-center bg-cyan-800">
+		<div class="container mx-auto flex justify-center items-center">
+			<div class="w-full max-w-xs">
+				<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+					<div class="mb-6 text-center">
+						<h1>SignUp</h1>
 					</div>
-					<div class="mb-6">
-						<%= f.label :password %>
-						<%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+					<%= form_with model: @user, local: true do |f| %>
+						<div class="mb-6">
+							<%= f.label :email %>
+							<%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+						</div>
+						<div class="mb-6">
+							<%= f.label :password %>
+							<%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+						</div>
+						<div class="mb-6">
+							<%= f.label :password_confirmation %>
+							<%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+						</div>
+						<%= f.submit 'Signup', class: 'btn' %>
+					<% end %>
+					<div class='text-center'>
+						<p>already have account?</p>
+						<%= link_to 'Login', login_path %>
 					</div>
-					<div class="mb-6">
-						<%= f.label :password_confirmation %>
-						<%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-					</div>
-					<%= f.submit 'Signup', class: 'btn' %>
-				<% end %>
-				<div class='text-center'>
-					<p>already have account?</p>
-					<%= link_to 'Login', login_path %>
 				</div>
 			</div>
 		</div>

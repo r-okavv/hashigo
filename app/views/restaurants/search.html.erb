@@ -1,40 +1,42 @@
-<div class="container mx-auto px-4">
-  <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
-    <div class="mb-6 mt-6">
-      <button type="button" id="get-location" class="btn">現在地を取得</button>
-    </div>
-    <div class="mb-6">
-      <%= f.label :address, '住所' %>
-      <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
-      <%= f.hidden_field :latitude, id: 'latitude' %>
-      <%= f.hidden_field :longitude, id: 'longitude' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :radius, '検索範囲（メートル）' %>
-      <%= f.number_field :radius, value: params[:radius]|| 50, min: 10, step: 10 %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :place_type, 'Bar'%>
-      <%= f.radio_button :place_type, 'bar'  %>
-      <%= f.label :place_type, 'Restaurant' %>
-      <%= f.radio_button :place_type, 'restaurant' %>
-    </div>
-
+<div class="flex-grow flex items-center justify-center">
+  <div class="container mx-auto px-4">
+    <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
+      <div class="mb-6 mt-6">
+        <button type="button" id="get-location" class="btn">現在地を取得</button>
+      </div>
       <div class="mb-6">
-      <%= f.label :rating, "クチコミスコア" %>
-      <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
-    </div>
-    <%# <div class="mb-6"> %>
-      <%# <%= f.label :closing_time, '閉店時間' %>
-      <%# <%= f.range_field :closing_time, value: 22, min: 0, max: 24, step: 1 %>
-    <%# </div> %>
-    <div class="mb-6">
-      <%= f.submit '検索', id: 'search-address',class:'btn' %>
-    </div>
-  <% end %>
+        <%= f.label :address, '住所' %>
+        <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
+        <%= f.hidden_field :latitude, id: 'latitude' %>
+        <%= f.hidden_field :longitude, id: 'longitude' %>
+      </div>
+      <div class="mb-6">
+        <%= f.label :radius, '検索範囲（メートル）' %>
+        <%= f.number_field :radius, value: params[:radius]|| 50, min: 10, step: 10 %>
+      </div>
+      <div class="mb-6">
+        <%= f.label :place_type, 'Bar'%>
+        <%= f.radio_button :place_type, 'bar'  %>
+        <%= f.label :place_type, 'Restaurant' %>
+        <%= f.radio_button :place_type, 'restaurant' %>
+      </div>
 
-  <%= render 'search_results', restaurants: @restaurants  %>
+        <div class="mb-6">
+        <%= f.label :rating, "クチコミスコア" %>
+        <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+      </div>
+      <%# <div class="mb-6"> %>
+        <%# <%= f.label :closing_time, '閉店時間' %>
+        <%# <%= f.range_field :closing_time, value: 22, min: 0, max: 24, step: 1 %>
+      <%# </div> %>
+      <div class="mb-6">
+        <%= f.submit '検索', id: 'search-address',class:'btn' %>
+      </div>
+    <% end %>
 
+    <%= render 'search_results', restaurants: @restaurants  %>
+  </div>
+</div>
 
 <script>
 document.addEventListener('turbo:load', function() {
@@ -84,4 +86,3 @@ document.addEventListener('turbo:load', function() {
   });
 });
 </script>
-</div>
