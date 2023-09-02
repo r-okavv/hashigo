@@ -15,12 +15,12 @@ class RestaurantsController < ApplicationController
   end
 
   def search
-    restaurants_array = fetch_restaurants
+    restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants)
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
   def address_search
-    restaurants_array = fetch_restaurants_from_address
+    restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants_from_address)
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
