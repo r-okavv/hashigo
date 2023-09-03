@@ -1,0 +1,31 @@
+ja:
+  defaults:
+    login: 'ログイン'
+    signup: 新規登録'
+    logout: 'ログアウト'
+    password_reset: 'パスワードリセット'
+    bookmark: 'ブックマーク'
+    search_menu: '店舗検索'
+    search: '現在地から検索'
+    address_search: '入力住所から検索'
+  my_reviews: 'レビュー履歴(実装予定)'
+  users:
+    new:
+      title: 'ユーザー登録'
+      to_login_page: 'ログインページへ'
+  user_sessions:
+    new:
+      title: 'ログイン'
+      to_register_page: '登録ページへ'
+      password_forget: 'パスワードをお忘れの方はこちら'
+  restaurants:
+    index:
+      title: '検索方法を選択'
+      to_search_page: '現在地から検索'
+      to_address_search_page: '入力住所から検索'
+    search:
+      title: '現在地から検索'
+    address_search:
+      title: '入力住所から検索'
+    bookmarks:
+      title: 'ブックマーク一覧'
