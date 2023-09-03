@@ -14,9 +14,11 @@
               <%= f.label :password %>
               <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
             </div>
+            <div class="flex justify-center">
               <%= f.submit (t 'defaults.login'), class: 'btn' %>
+            </div>
           <% end %>
-          <div class='text-center'>
+          <div class='text-center mt-4'>
             <%= link_to (t '.to_register_page'), new_user_path %><br>
             <%= link_to (t '.password_forget'), '#' %>
           </div>
