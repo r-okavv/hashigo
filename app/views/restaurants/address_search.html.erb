@@ -3,33 +3,29 @@
 		<h1 class="text-2xl font-bold mb-8"><%= t '.title' %></h1>
 		<%= form_with url: address_search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
 			<div class="mb-6 mt-6">
-				<%= f.label :address, '住所' %>
+				<%= f.label :address, (t '.address' ) %>
 				<%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
 				<%= f.hidden_field :latitude, id: 'latitude' %>
 				<%= f.hidden_field :longitude, id: 'longitude' %>
 			</div>
-			<div class="mb-6">
-				<%= f.label :radius, '検索範囲（メートル）' %>
-				<%= f.number_field :radius, value: params[:radius]|| 50, min: 10, step: 10 %>
-			</div>
-			<div class="mb-6">
-				<%= f.label :place_type, 'Bar'%>
-				<%= f.radio_button :place_type, 'bar'  %>
-				<%= f.label :place_type, 'Restaurant' %>
-				<%= f.radio_button :place_type, 'restaurant' %>
-			</div>
+      <div class="mb-6">
+        <%= f.label :radius,(t '.radius' ) %>
+        <%= f.number_field :radius, value: params[:radius]|| 100, min: 50, step: 50, class:"input input-bordered"  %>
+      </div>
+      <div class="mb-6">
+        <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
+        <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
+        <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
+        <%= f.label :place_type, (t '.bar' ) %>
+      </div>
 
-				<div class="mb-6">
-				<%= f.label :rating, "クチコミスコア" %>
-				<%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
-			</div>
-			<%# <div class="mb-6"> %>
-				<%# <%= f.label :closing_time, '閉店時間' %>
-				<%# <%= f.range_field :closing_time, value: 22, min: 0, max: 24, step: 1 %>
-			<%# </div> %>
-			<div class="mb-6">
-				<%= f.submit '検索', id: 'search-address',class:'btn' %>
-			</div>
+        <div class="mb-6">
+        <%= f.label :rating, (t '.rating' )%>
+        <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+      </div>
+      <div class="mb-6">
+        <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
+      </div>
 		<% end %>
 
 		<%= render 'search_results', restaurants: @restaurants  %>

@@ -5,7 +5,6 @@ ja:
     logout: 'ログアウト'
     bookmark: 'ブックマーク'
     search_menu: '店舗検索'
-    submit: '検索'
     password_reset: 'パスワードリセット'
     my_reviews: 'レビュー履歴(実装予定)'
     terms_of_use: '利用規約'
@@ -27,8 +26,23 @@ ja:
       to_address_search_page: '入力住所から検索'
     search:
       title: '現在地から検索'
+      get_location: '現在地を取得'
+      address: '住所'
+      radius: '検索範囲(m)'
+      category: '店舗タイプ'
+      rating: 'クチコミスコア'
+      restaurant: 'レストラン'
+      bar: 'バー'
+      submit: '検索'
     address_search:
       title: '入力住所から検索'
+      address: '住所'
+      radius: '検索範囲(m)'
+      category: '店舗タイプ'
+      rating: 'クチコミスコア'
+      restaurant: 'レストラン'
+      bar: 'バー'
+      submit: '検索'
     show:
       title: '店舗詳細'
     bookmarks:
