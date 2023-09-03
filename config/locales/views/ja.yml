@@ -27,5 +27,7 @@ ja:
       title: '現在地から検索'
     address_search:
       title: '入力住所から検索'
+    show:
+      title: '店舗詳細'
     bookmarks:
       title: 'ブックマーク一覧'
