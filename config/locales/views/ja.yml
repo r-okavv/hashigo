@@ -1,22 +1,24 @@
 ja:
   defaults:
     login: 'ログイン'
-    signup: 新規登録'
+    register: '登録'
     logout: 'ログアウト'
-    password_reset: 'パスワードリセット'
     bookmark: 'ブックマーク'
     search_menu: '店舗検索'
-    search: '現在地から検索'
-    address_search: '入力住所から検索'
-  my_reviews: 'レビュー履歴(実装予定)'
+    submit: '検索'
+    password_reset: 'パスワードリセット'
+    my_reviews: 'レビュー履歴(実装予定)'
+    terms_of_use: '利用規約'
+    privacy_policy: 'プライバシーポリシー'
+    contact: 'お問合せ'
   users:
     new:
-      title: 'ユーザー登録'
+      title: '新規登録'
       to_login_page: 'ログインページへ'
   user_sessions:
     new:
       title: 'ログイン'
-      to_register_page: '登録ページへ'
+      to_register_page: '新規登録ページへ'
       password_forget: 'パスワードをお忘れの方はこちら'
   restaurants:
     index:

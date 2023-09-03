@@ -18,11 +18,10 @@
 							<%= f.label :password_confirmation %>
 							<%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
 						</div>
-						<%= f.submit 'Signup', class: 'btn' %>
+						<%= f.submit (t 'defaults.register'), class: 'btn' %>
 					<% end %>
 					<div class='text-center'>
-						<p>already have account?</p>
-						<%= link_to 'Login', login_path %>
+						<%= link_to (t '.to_login_page'), login_path %>
 					</div>
 				</div>
 			</div>

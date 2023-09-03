@@ -6,10 +6,10 @@
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
-          <a>お店検索</a>
+          <a><%= t 'defaults.search_menu' %></a>
           <ul class="p-2">
-            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
-            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
           </ul>
         </li>
       </ul>
@@ -20,17 +20,17 @@
     <ul class="menu menu-horizontal px-1">
       <li tabindex="0">
         <details>
-          <summary>お店検索</summary>
+          <summary><%= t 'defaults.search_menu' %></summary>
           <ul class="p-2 bg-cyan-700">
-            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
-            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
           </ul>
         </details>
       </li>
     </ul>
   </div>
 <div class="navbar-end flex">
-    <%= link_to 'Signup', new_user_path, class: 'bg-transparent hover:bg-blue-500 text-neutral-50 font-semibold hover:text-neutral-50 py-4 px-4 border border-neutral-50 hover:border-transparent rounded-full mr-4' %>
-    <%= link_to 'Login', login_path, class: 'btn rounded-full' %>
+    <%= link_to t('users.new.title'), new_user_path, class: 'bg-transparent hover:bg-blue-500 text-neutral-50 font-semibold hover:text-neutral-50 py-4 px-4 border border-neutral-50 hover:border-transparent rounded-full mr-4' %>
+    <%= link_to t('user_sessions.new.title'), login_path, class: 'btn rounded-full' %>
 </div>
 </div>
