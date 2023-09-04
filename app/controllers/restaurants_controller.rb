@@ -87,7 +87,7 @@ class RestaurantsController < ApplicationController
   def fetch_restaurants_from_address
     location = Geocoder.search(params[:address]).first if params[:address].present?
 
-    if location.nil? || location.latitude.nil? || location.longitude.nil?
+    if location&.latitude.nil? || location&.longitude.nil?
       return []
     end
 
