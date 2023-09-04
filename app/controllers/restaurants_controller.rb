@@ -40,10 +40,11 @@ class RestaurantsController < ApplicationController
     @restaurant.tag_list.remove(params[:tag_name])
     @restaurant.save
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("tags-section", partial: "tags_section", locals: { restaurant: @restaurant }) }
       format.html { redirect_to @restaurant }
     end
   end
+
 
   def update_tags
     @restaurant.tag_list = params[:restaurant][:tag_list]
