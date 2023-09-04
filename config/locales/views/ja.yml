@@ -47,5 +47,7 @@ ja:
       submit: '検索'
     show:
       title: '店舗詳細'
+      bookmark_count: 'ブックマーク数'
+      back: '戻る'
     bookmarks:
       title: 'ブックマーク一覧'
