@@ -72,7 +72,10 @@ class RestaurantsController < ApplicationController
 
 
   def fetch_restaurants
-    if params[:latitude] && params[:longitude]
+    if params[:address]
+      location = Geocoder.search(params[:address]).first
+      location ? fetch_places_from_api("#{location.latitude},#{location.longitude}", opennow: true) : []
+    elsif params[:latitude] && params[:longitude]
       location = "#{params[:latitude]},#{params[:longitude]}"
       # 現在地から取得の場合は現在営業中の店舗のみを検索
       fetch_places_from_api(location, opennow: true)
