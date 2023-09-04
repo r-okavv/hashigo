@@ -1,0 +1,71 @@
+ja:
+  defaults:
+    login: 'ログイン'
+    register: '登録'
+    logout: 'ログアウト'
+    bookmark: 'ブックマーク'
+    search_menu: '店舗検索'
+    password_reset: 'パスワードリセット'
+    my_reviews: 'レビュー履歴(実装予定)'
+    terms_of_use: '利用規約'
+    privacy_policy: 'プライバシーポリシー'
+    contact: 'お問合せ'
+  users:
+    new:
+      title: '新規登録'
+      to_login_page: 'ログインページへ'
+  user_sessions:
+    new:
+      title: 'ログイン'
+      to_register_page: '新規登録ページへ'
+      password_forget: 'パスワードをお忘れの方はこちら'
+  restaurants:
+    index:
+      title: '検索方法を選択'
+      to_search_page: '現在地から検索'
+      to_address_search_page: '入力住所から検索'
+    search:
+      title: '現在地から検索'
+      get_location: '現在地を取得'
+      address: '住所'
+      radius: '検索範囲(m)'
+      category: '店舗タイプ'
+      rating: 'クチコミスコア'
+      restaurant: 'レストラン'
+      bar: 'バー'
+      submit: '検索'
+      bookmark_count: 'ブックマーク数'
+      edit_tag: 'タグ編集'
+      add_tag: 'タグを登録する'
+      update: '更新'
+      cancel: 'キャンセル'
+      to_show_page: '詳細'
+      no_result: '条件に合うお店が見つかりませんでした'
+      result: '検索結果'
+      sorting: '並び替え'
+      default_sort: 'デフォルト'
+      rating_disc: 'クチコミスコア降順'
+      bookmark_disc: 'ブックマーク数降順'
+      start_select: 'ランダムにお店を決める'
+      exec_random_select: '選択したお店の中から決める'
+      instruction_for_select: '候補のお店にチェックを入れてください'
+    address_search:
+      title: '入力住所から検索'
+      address: '住所'
+      radius: '検索範囲(m)'
+      category: '店舗タイプ'
+      rating: 'クチコミスコア'
+      restaurant: 'レストラン'
+      bar: 'バー'
+      submit: '検索'
+    show:
+      title: '店舗詳細'
+      bookmark_count: 'ブックマーク数'
+    bookmarks:
+      title: 'ブックマーク一覧'
+      no_result: 'ブックマーク中のお店はありません'
+    tags:
+      tag_input: 'タグ入力欄'
+      add_tag: 'タグ追加'
+      update: '更新'
+      cancel: 'キャンセル'

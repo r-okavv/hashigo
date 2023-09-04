@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to login_path, success: 'Logged in'
     else
-      flash.now[danger] = 'Login failed'
       render :new
     end
   end

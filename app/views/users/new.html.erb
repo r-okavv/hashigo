@@ -2,8 +2,8 @@
 		<div class="container mx-auto flex justify-center items-center">
 			<div class="w-full max-w-xs">
 				<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-					<div class="mb-6 text-center">
-						<h1>SignUp</h1>
+					<div class="font-bold text-xl mt-4 mb-6 text-center">
+						<h1><%= t '.title' %></h1>
 					</div>
 					<%= form_with model: @user, local: true do |f| %>
 						<div class="mb-6">
@@ -18,11 +18,12 @@
 							<%= f.label :password_confirmation %>
 							<%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
 						</div>
-						<%= f.submit 'Signup', class: 'btn' %>
+						<div class="flex justify-center">
+							<%= f.submit (t 'defaults.register'), class: 'btn' %>
+						</div>
 					<% end %>
-					<div class='text-center'>
-						<p>already have account?</p>
-						<%= link_to 'Login', login_path %>
+					<div class='text-center mt-4'>
+						<%= link_to (t '.to_login_page'), login_path %>
 					</div>
 				</div>
 			</div>

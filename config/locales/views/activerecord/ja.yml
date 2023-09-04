@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+      restaurant: '店舗'
+      bookmark: 'ブックマーク'
+      tag: 'タグ'
+    attributes:
+      user:
+        id: 'ID'
+        name: 'ユーザー名'
+        full_name: '氏名'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード(確認)'
+        created_at: '登録日時'
+        updated_at: '更新日時'
+      restaurants:
+        place_id: 'Place_ID'
+        name: '店舗名'
+        latitude: '緯度'
+        longitude: '経度'
+        address: '住所'
+        rating: 'クチコミスコア'
+        phone_number: '電話番号'
+        opening_hours: '営業時間'
+        categories: '店舗カテゴリー'
+        url: 'URL'
+        image_url: '画像URL'
+        html_attributions: '画像ソース'
+        price_level: '価格帯'
+        created_at: '登録日時'
+        updated_at: '更新日時'
+      tags:
+        name: 'タグ'

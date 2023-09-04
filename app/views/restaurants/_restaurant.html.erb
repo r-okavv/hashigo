@@ -15,13 +15,13 @@
       <%# <div class="w-2/3 p-4"> %>
       <div class="w-3/4 p-4">
         <h2 class="card-title text-lg font-bold mb-2"><%= restaurant.name %></h2>
-        <p>住所：<%= restaurant.address %></p>
-        <p>電話番号：<%= restaurant.phone_number %></p>
-        <p>Googleクチコミスコア: <%= restaurant.rating %></p>
-        <p>価格帯：<%= restaurant.price_level_str %></p>
-        <p>ブックマーク数: <%= restaurant.bookmark_count %></p>
+        <p><%= t('activerecord.attributes.restaurants.address')%>：<%= restaurant.address %></p>
+        <p><%= t('activerecord.attributes.restaurants.phone_number')%>：<%= restaurant.phone_number %></p>
+        <p><%= t('activerecord.attributes.restaurants.rating')%>：<%= restaurant.rating %></p>
+        <p><%= t('activerecord.attributes.restaurants.price_level')%>：<%= restaurant.price_level_str %></p>
+        <p><%= t('restaurants.search.bookmark_count')%>：<%= restaurant.bookmark_count %></p>
         <div class="mt-4">
-          <%= link_to '詳細', restaurant_path(restaurant), class: "btn btn-primary" %>
+          <%= link_to (t 'restaurants.search.to_show_page'), restaurant_path(restaurant), class: "btn btn-primary" %>
         </div>
       </div>
       <div class="absolute top-2 right-2">

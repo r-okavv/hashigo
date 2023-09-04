@@ -6,14 +6,14 @@
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
-          <a>お店検索</a>
+          <a><%= t 'defaults.search_menu' %></a>
           <ul class="p-2">
-            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
-            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
           </ul>
         </li>
-        <li><%= link_to 'Bookmarks', bookmarks_restaurants_path %></li>
-        <li><a>My reviews（工事中）</a></li>
+        <li><%= link_to t('restaurants.bookmarks.title'), bookmarks_restaurants_path %></li>
+        <li><%= link_to t('defaults.my_reviews'), '#' %></li>
       </ul>
     </div>
     <%= link_to 'HASHIGO', root_path,class:"btn btn-ghost normal-case text-xl text-neutral-50" %>
@@ -22,18 +22,18 @@
     <ul class="menu menu-horizontal px-1">
       <li tabindex="0">
         <details>
-          <summary>お店検索</summary>
+          <summary><%= t 'defaults.search_menu' %></summary>
           <ul class="p-2 bg-cyan-700">
-            <li><%= link_to '現在地から検索', search_restaurants_path %></li>
-            <li><%= link_to '入力住所から検索', address_search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
+            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
           </ul>
         </details>
       </li>
-      <li><%= link_to 'Bookmarks', bookmarks_restaurants_path %></li>
-      <li><a>My reviews（工事中）</a></li>
+      <li><%= link_to t('restaurants.bookmarks.title'), bookmarks_restaurants_path %></li>
+      <li><%= link_to t('defaults.my_reviews'), '#' %></li>
     </ul>
   </div>
   <div class="navbar-end">
-    <%= link_to 'Logout', logout_path, data: { turbo_method: :delete }, class:'btn rounded-full'%>
+    <%= link_to t('defaults.logout'), logout_path, data: { turbo_method: :delete }, class:'btn rounded-full'%>
   </div>
 </div>
