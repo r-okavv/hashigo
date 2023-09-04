@@ -31,11 +31,6 @@ class RestaurantsController < ApplicationController
   def tags
   end
 
-  def add_tag
-    @restaurant.tag_list.add(params[:tag_name])
-    @restaurant.save
-  end
-
   def remove_tag
     @restaurant.tag_list.remove(params[:tag_name])
     @restaurant.save

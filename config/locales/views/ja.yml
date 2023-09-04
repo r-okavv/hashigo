@@ -54,6 +54,7 @@ ja:
       bookmark_count: 'ブックマーク数'
     bookmarks:
       title: 'ブックマーク一覧'
+      no_result: 'ブックマーク中の店舗はありません'
     tags:
       tag_input: 'タグ入力欄'
       add_tag: 'タグ追加'
