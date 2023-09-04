@@ -1,11 +1,10 @@
-<div class="container mx-auto px-4">
-	<h1 class="text-2xl font-bold mt-8 mb-8"><%= t '.title' %></h1>
-  <div class="mt-4 flex items-center justify-between">
-    <h1><strong><%= @restaurant.name %></strong></h1>
+<div class="container mx-auto px-6">
+  <div class="text-2xl font-bold mt-4 mb-4 flex items-center justify-between">
+    <h1><%= @restaurant.name %></h1>
     <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
   </div>
 
-  <li><strong>住所:</strong> <%= @restaurant.address %>
+  <li><strong>住所：</strong> <%= @restaurant.address %>
   <li><strong>電話番号：</strong> <%= @restaurant.phone_number %>
   <li><strong>価格帯：</strong> <%= @restaurant.price_level_str %>
   <li><strong>クチコミスコア:</strong> <%= @restaurant.rating %>
