@@ -14,10 +14,11 @@
     <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
   <% end %>
   <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
-  <% if @restaurant.opening_hours %>
-    <li><strong><%= t('activerecord.attributes.restaurants.opening_hours')%>：</strong></p>
+  <% if @restaurant.opening_hours && @restaurant.opening_hours != "N/A" %>
+    <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
   <% end %>
+
     <%# <p><strong>Categories:</strong> <%= @restaurant.categories %></p>
 
   <%= image_tag (@restaurant.image_url || 'default_image.jpg'), alt: @restaurant.name %>
