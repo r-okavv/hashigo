@@ -34,6 +34,8 @@ ja:
       restaurant: 'レストラン'
       bar: 'バー'
       submit: '検索'
+      bookmark_count: 'ブックマーク数'
+      to_show_page: '詳細'
     address_search:
       title: '入力住所から検索'
       address: '住所'
