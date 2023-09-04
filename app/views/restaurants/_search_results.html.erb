@@ -1,24 +1,24 @@
-  <% if restaurants.present? %>
-  <div class="flex justify-between items-center mb-6">
-    <p class="text-lg">検索結果</p>
-    <div>
-      <label for="sort-options" class="mr-2">並べ替え:</label>
-      <select id="sort-options" class="input input-bordered">
-        <option value="default">デフォルト</option>
-        <option value="rating">Rating降順</option>
-        <option value="bookmarks">ブックマーク数降順</option>
-      </select>
-    </div>
+<% if restaurants.present? %>
+<div class="flex justify-between items-center mb-6">
+  <p class="text-lg"><%= t 'restaurants.search.result' %></p>
+  <div>
+    <label for="sort-options" class="mr-2"><%= t 'restaurants.search.sorting' %>:</label>
+    <select id="sort-options" class="input input-bordered">
+      <option value="default"><%= t 'restaurants.search.default_sort' %></option>
+      <option value="rating"><%= t 'restaurants.search.rating_disc' %></option>
+      <option value="bookmarks"><%= t 'restaurants.search.bookmark_disc' %></option>
+    </select>
   </div>
-  <div class="container mx-auto", id="restaurant-list">
-    <%= render restaurants %>
-  </div>
-  <div class="mt-4 mb-6 text-center">
-    <%= paginate restaurants %>
-  </div>
-  <div class="mt-4 mb-6 text-center">
-    <button id="select-candidate-button" class="btn btn-primary">アプリにおまかせ</button>
-    <button id="random-button" class="btn btn-primary hidden">お店を決定</button>
-  </div>
-  <p id="instruction" class="mb-4 text-left hidden">候補のお店にチェックを入れて「お店を選択」ボタンをクリックしてください。</p>
-  <% end %>
+</div>
+<div class="container mx-auto", id="restaurant-list">
+  <%= render restaurants %>
+</div>
+<div class="mt-4 mb-6 text-center">
+  <%= paginate restaurants %>
+</div>
+<div class="mt-4 mb-6 text-center">
+  <button id="select-candidate-button" class="btn btn-primary"><%= t 'restaurants.search.start_select' %></button>
+  <button id="random-button" class="btn btn-primary hidden"><%= t 'restaurants.search.exec_random_select' %></button>
+  <p id="instruction" class="hidden"><%= t 'restaurants.search.instruction_for_select' %></p>
+</div>
+<% end %>

@@ -40,6 +40,15 @@ ja:
       update: '更新'
       cancel: 'キャンセル'
       to_show_page: '詳細'
+      no_result: '条件に合うお店が見つかりませんでした'
+      result: '検索結果'
+      sorting: '並び替え'
+      default_sort: 'デフォルト'
+      rating_disc: 'クチコミスコア降順'
+      bookmark_disc: 'ブックマーク数降順'
+      start_select: 'ランダムにお店を決める'
+      exec_random_select: '選択したお店の中から決める'
+      instruction_for_select: '候補のお店にチェックを入れてください'
     address_search:
       title: '入力住所から検索'
       address: '住所'
@@ -54,11 +63,9 @@ ja:
       bookmark_count: 'ブックマーク数'
     bookmarks:
       title: 'ブックマーク一覧'
-      no_result: 'ブックマーク中の店舗はありません'
+      no_result: 'ブックマーク中のお店はありません'
     tags:
       tag_input: 'タグ入力欄'
       add_tag: 'タグ追加'
       update: '更新'
       cancel: 'キャンセル'
-
-
