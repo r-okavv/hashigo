@@ -8,15 +8,15 @@ class UserSessionsController < ApplicationController
     @user = login(params[:email], params[:password])
 
     if @user
-      redirect_back_or_to restaurants_path
+      redirect_back_or_to restaurants_path, success: t('.success')
     else
-      flash.now[:danger] = 'Login failed'
-      render :new
+      flash[:error] = t('.fail')
+      redirect_to login_path
     end
   end
 
   def destroy
     logout
-    redirect_to new_user_path
+    redirect_to login_path, success: t('.success')
   end
 end

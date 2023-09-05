@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
       format.turbo_stream
       format.html { redirect_back fallback_location: root_path }
     end
-    end
+  end
 
   def destroy
     @restaurant = current_user.bookmarks.find(params[:id]).restaurant
