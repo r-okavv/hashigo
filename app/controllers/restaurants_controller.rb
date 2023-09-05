@@ -76,7 +76,7 @@ class RestaurantsController < ApplicationController
     if params[:address].present?
       location = Geocoder.search(params[:address]).first
       if location&.latitude.nil? || location&.longitude.nil?
-        flash[:error] = "住所を取得できませんでした"
+        flash[:error] = t('.fail')
         return []
       end
       fetch_places_from_api("#{location.latitude},#{location.longitude}", opennow: true)
@@ -93,7 +93,7 @@ class RestaurantsController < ApplicationController
     if params[:address]
       location = Geocoder.search(params[:address]).first
       if location.nil? || location&.latitude.nil? || location&.longitude.nil?
-        flash[:error] = "住所を取得できませんでした"
+        flash[:error] = t('.fail')
         return []
       end
   

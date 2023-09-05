@@ -61,6 +61,7 @@ ja:
       start_select: 'ランダムにお店を決める'
       exec_random_select: '選択したお店の中から決める'
       instruction_for_select: '候補のお店にチェックを入れてください'
+      fail: '入力された住所は見つかりませんでした'
     address_search:
       title: '入力住所から検索'
       address: '住所'
@@ -70,6 +71,7 @@ ja:
       restaurant: 'レストラン'
       bar: 'バー'
       submit: '検索'
+      fail: '入力された住所は見つかりませんでした'
     show:
       title: '店舗詳細'
       bookmark_count: 'ブックマーク数'
