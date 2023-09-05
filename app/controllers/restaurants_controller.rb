@@ -20,6 +20,10 @@ class RestaurantsController < ApplicationController
   end
 
   def address_search
+    if flash[:error]
+      redirect_to address_search_restaurants_path and return
+    end
+
     restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants_from_address)
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
@@ -69,10 +73,14 @@ class RestaurantsController < ApplicationController
 
 
   def fetch_restaurants
-    if params[:address]
+    if params[:address].present?
       location = Geocoder.search(params[:address]).first
-      location ? fetch_places_from_api("#{location.latitude},#{location.longitude}", opennow: true) : []
-    elsif params[:latitude] && params[:longitude]
+      if location&.latitude.nil? || location&.longitude.nil?
+        flash[:error] = "住所を取得できませんでした"
+        return []
+      end
+      fetch_places_from_api("#{location.latitude},#{location.longitude}", opennow: true)
+    elsif params[:latitude].present? && params[:longitude].present?
       location = "#{params[:latitude]},#{params[:longitude]}"
       # 現在地から取得の場合は現在営業中の店舗のみを検索
       fetch_places_from_api(location, opennow: true)
@@ -82,13 +90,16 @@ class RestaurantsController < ApplicationController
   end
 
   def fetch_restaurants_from_address
-    location = Geocoder.search(params[:address]).first if params[:address].present?
-
-    if location&.latitude.nil? || location&.longitude.nil?
-      return []
+    if params[:address]
+      location = Geocoder.search(params[:address]).first
+      if location.nil? || location&.latitude.nil? || location&.longitude.nil?
+        flash[:error] = "住所を取得できませんでした"
+        return []
+      end
+  
+      return fetch_places_from_api("#{location.latitude},#{location.longitude}")
     end
-
-    fetch_places_from_api("#{location.latitude},#{location.longitude}")
+    []
   end
 
 
