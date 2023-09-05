@@ -22,13 +22,9 @@
     <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
   <% end %>
-  <%= image_tag (@restaurant.image_url || 'default_image.jpg'), alt: @restaurant.name %>
-
-
-<% if @restaurant.html_attributions.present? %>
-  <div>
+  <% if @restaurant.image_url%>
+    <%= image_tag (@restaurant.image_url), alt: @restaurant.name %>
     <%= simple_format("Photo by: #{@restaurant.html_attributions}") %>
-  </div>
 <% end %>
 
 </div>
