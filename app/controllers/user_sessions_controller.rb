@@ -8,9 +8,9 @@ class UserSessionsController < ApplicationController
     @user = login(params[:email], params[:password])
 
     if @user
-      redirect_back_or_to restaurants_path
+      redirect_back_or_to restaurants_path, success: t('.success')
     else
-      flash.now[:danger] = 'Login failed'
+      flash.now[:error] = 'Login failed'
       render :new
     end
   end

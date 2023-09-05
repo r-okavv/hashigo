@@ -10,15 +10,27 @@ ja:
     terms_of_use: '利用規約'
     privacy_policy: 'プライバシーポリシー'
     contact: 'お問合せ'
+    message:
+      require_login: 'ログインしてください'
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新できませんでした"
   users:
     new:
       title: '新規登録'
       to_login_page: 'ログインページへ'
+    create:
+      success: 'ユーザー登録が完了しました'
+      fail: 'ユーザー登録に失敗しました'
   user_sessions:
     new:
       title: 'ログイン'
       to_register_page: '新規登録ページへ'
       password_forget: 'パスワードをお忘れの方はこちら'
+    create:
+      success: 'ログインしました'
+      fail: 'ログインに失敗しました'
+    destroy:
+      success: 'ログアウトしました'
   restaurants:
     index:
       title: '検索方法を選択'
@@ -69,3 +81,8 @@ ja:
       add_tag: 'タグ追加'
       update: '更新'
       cancel: 'キャンセル'
+  bookmarks:
+    create:
+      success: 'ブックマークしました'
+    destroy:
+      success: 'ブックマークを外しました'
