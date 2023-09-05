@@ -17,9 +17,8 @@ Rails.application.routes.draw do
       get :bookmarks
     end
     member do
-      get :tags
-      patch :tags, action: :update_tags
-      delete :remove_tag
+      post 'update_tag'
+      delete 'remove_tag'
     end
   end
   post 'select_restaurants', to: 'restaurants#random_select', as: 'select_restaurants'

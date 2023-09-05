@@ -14,9 +14,7 @@
   <li><strong><%= t('activerecord.attributes.restaurants.rating')%>:</strong> <%= @restaurant.rating %>
   <li><strong><%= t('.bookmark_count')%>:</strong> <%= @restaurant.bookmark_count %>
   <li><strong><%= t('activerecord.attributes.tags.name')%>：</strong></p>
-  <%= turbo_frame_tag 'tags-section' do %>
-    <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
-  <% end %>
+  <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
   <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
   <% if @restaurant.opening_hours && @restaurant.opening_hours != "N/A" %>
     <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
