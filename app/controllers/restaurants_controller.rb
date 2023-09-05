@@ -24,9 +24,6 @@ class RestaurantsController < ApplicationController
     @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
 
-  # def new_tags; end
-
-  # def edit_tags; end
 
   def tags
   end

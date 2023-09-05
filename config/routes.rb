@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     member do
       get :tags
       patch :tags, action: :update_tags
-      post :add_tag
       delete :remove_tag
     end
   end
