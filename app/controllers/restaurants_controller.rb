@@ -35,25 +35,14 @@ class RestaurantsController < ApplicationController
     @paginated_bookmarks = bookmark_restaurants
   end
 
-  # def update_tag
-  #   @restaurant.tag_list = params[:restaurant][:tag_list]
-  #   @restaurant.save
-  #   redirect_to @restaurant
-  # end
-
   def update_tag
     @restaurant.tag_list = params[:restaurant][:tag_list]
     if @restaurant.save
       redirect_to restaurant_path(@restaurant)
-    # else
-      # エラーメッセージを表示するロジックを追加することができます
+    else
+      flash[:error] = t('.fail')
+      redirect_to @restaurant
     end
-  end
-
-  def remove_tag
-    @restaurant.tag_list.remove(params[:tag_name])
-    @restaurant.save
-    redirect_to @restaurant
   end
 
   private

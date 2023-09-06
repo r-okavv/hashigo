@@ -75,14 +75,15 @@ ja:
     show:
       title: '店舗詳細'
       bookmark_count: 'ブックマーク数'
+      tag_input: 'タグ入力欄'
+      add_tag: 'タグを登録する'
+      add: '追加'
+      edit: '編集'
+      update: '更新'
+      cancel: 'キャンセル'
     bookmarks:
       title: 'ブックマーク一覧'
       no_result: 'ブックマーク中のお店はありません'
-    tags:
-      tag_input: 'タグ入力欄'
-      add_tag: 'タグ追加'
-      update: '更新'
-      cancel: 'キャンセル'
   bookmarks:
     create:
       success: 'ブックマークしました'

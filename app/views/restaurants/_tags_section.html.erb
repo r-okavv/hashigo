@@ -6,14 +6,14 @@
   <% end %>
 
   <button id="edit-button" class="btn btn-xs btn-accent">
-    <%= restaurant.tags.any? ? "編集" : "タグを登録する" %>
+    <%= restaurant.tags.any? ?  (t 'restaurants.show.edit') : (t 'restaurants.show.add_tag')  %>
   </button>
 </div>
 
 <div id="tag-form" style="display: none;">
   <%= form_with model: restaurant, url: update_tag_restaurant_path(restaurant), method: :post  do |f| %>
     <%= f.text_field :tag_list, value: restaurant.tag_list.join(", "), placeholder: "カンマで区切って入力", class: "input input-bordered input-sm w-full max-w-xs" %>
-    <%= f.submit restaurant.tag_list.length > 0 ? "更新" : "追加", class: "btn btn-sm btn-accent" %>
+    <%= f.submit restaurant.tag_list.length > 0 ? (t 'restaurants.show.update') : (t 'restaurants.show.add'), class: "btn btn-sm btn-accent" %>
   <% end %>
 </div>
 
