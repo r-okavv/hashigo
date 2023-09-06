@@ -1,17 +1,37 @@
-<div id="tags-section">
-	<% if restaurant.tags.present? %>
-  	<% restaurant.tags.each do |tag| %>
+<div id="tag-section">
+  <% restaurant.tags.each do |tag| %>
     <div class="badge badge-info gap-2">
       <%= tag.name %>
-      <%= link_to remove_tag_restaurant_path(restaurant, tag_name: tag.name), data: { turbo: true, turbo_method: :delete } do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      <% end %>
     </div>
-    <% end %>
-    <%= link_to (t 'restaurants.search.edit_tag'), tags_restaurant_path(restaurant), class: "btn btn-xs btn-accent" , data: { turbo: true, turbo_frame: "tags-section" } %>
-  <% else %>
-    <%= link_to (t 'restaurants.search.add_tag'), tags_restaurant_path(restaurant), class: "btn btn-xs btn-accent" , data: { turbo: true, turbo_frame: "tags-section" } %>
+  <% end %>
+
+  <button id="edit-button" class="btn btn-xs btn-accent">
+    <%= restaurant.tags.any? ?  (t 'restaurants.show.edit') : (t 'restaurants.show.add_tag')  %>
+  </button>
+</div>
+
+<div id="tag-form" style="display: none;">
+  <%= form_with model: restaurant, url: update_tag_restaurant_path(restaurant), method: :post  do |f| %>
+    <%= f.text_field :tag_list, value: restaurant.tag_list.join(", "), placeholder: "カンマで区切って入力", class: "input input-bordered input-sm w-full max-w-xs" %>
+    <%= f.submit restaurant.tag_list.length > 0 ? (t 'restaurants.show.update') : (t 'restaurants.show.add'), class: "btn btn-sm btn-accent" %>
   <% end %>
 </div>
+
+<script>
+document.addEventListener('turbo:load', function() {
+  const editButton = document.getElementById("edit-button");
+  const tagSection = document.getElementById("tag-section");
+  const tagForm = document.getElementById("tag-form");
+  const form = tagForm.querySelector('form');
+
+  editButton.addEventListener("click", function() {
+    tagSection.style.display = "none";
+    tagForm.style.display = "block";
+  });
+
+  form.addEventListener("submit", function(event) {
+    tagForm.style.display = "none";
+    tagSection.style.display = "block";
+  });
+});
+</script>

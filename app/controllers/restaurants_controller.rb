@@ -4,14 +4,13 @@ class RestaurantsController < ApplicationController
   require 'json'
 
   skip_before_action :require_login, only: %i[index show search address_search]
-  # before_action :set_google_client
-  before_action :set_restaurant, only: [:tags, :add_tag, :remove_tag, :update_tags]
+  before_action :set_restaurant, only: [:tags, :edit_tag, :update_tag]
 
   def index
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id]).decorate
+    @restaurant = Restaurant.includes(:tags).find(params[:id]).decorate
   end
 
   def search
@@ -29,32 +28,20 @@ class RestaurantsController < ApplicationController
   end
 
 
-  def tags
-  end
-
-  def remove_tag
-    @restaurant.tag_list.remove(params[:tag_name])
-    @restaurant.save
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace("tags-section", partial: "tags_section", locals: { restaurant: @restaurant }) }
-      format.html { redirect_to @restaurant }
-    end
-  end
-
-
-  def update_tags
-    @restaurant.tag_list = params[:restaurant][:tag_list]
-    @restaurant.save
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @restaurant }
-    end
-  end
-
   def bookmarks
     bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc).page(params[:page])
     @bookmark_restaurants = bookmark_restaurants.decorate
     @paginated_bookmarks = bookmark_restaurants
+  end
+
+  def update_tag
+    @restaurant.tag_list = params[:restaurant][:tag_list]
+    if @restaurant.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      flash[:error] = t('.fail')
+      redirect_to @restaurant
+    end
   end
 
   private
@@ -96,7 +83,7 @@ class RestaurantsController < ApplicationController
         flash[:error] = t('.fail')
         return []
       end
-  
+
       return fetch_places_from_api("#{location.latitude},#{location.longitude}")
     end
     []
