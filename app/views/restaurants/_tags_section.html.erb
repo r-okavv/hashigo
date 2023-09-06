@@ -4,7 +4,4 @@
 	</div>
 <% end %>
 
-<%= form_with model:restaurant, url: update_tag_restaurant_path(restaurant), method: :post do |f| %>
-  <%= f.text_field :tag_list, value:restaurant.tag_list.join(", "), placeholder: "カンマで区切って入力" %>
-  <%= f.submit restaurant.tag_list.length > 0 ? "更新" : "追加", class: "btn btn-xs btn-accent" %>
-<% end %>
+<%= render 'tag_form', { restaurant: restaurant } %>
