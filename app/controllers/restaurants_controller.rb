@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
 
   skip_before_action :require_login, only: %i[index show search address_search]
   # before_action :set_google_client
-  before_action :set_restaurant, only: [:tags, :update_tag, :remove_tag]
+  before_action :set_restaurant, only: [:tags, :edit_tag, :update_tag, :remove_tag]
 
   def index
   end
@@ -35,14 +35,21 @@ class RestaurantsController < ApplicationController
     @paginated_bookmarks = bookmark_restaurants
   end
 
+  # def update_tag
+  #   @restaurant.tag_list = params[:restaurant][:tag_list]
+  #   @restaurant.save
+  #   redirect_to @restaurant
+  # end
+
   def update_tag
-    # @restaurant.tag_list.add(params[:tag_name])
     @restaurant.tag_list = params[:restaurant][:tag_list]
-    @restaurant.save
-    @restaurant.save
-    redirect_to @restaurant
+    if @restaurant.save
+      redirect_to restaurant_path(@restaurant)
+    # else
+      # エラーメッセージを表示するロジックを追加することができます
+    end
   end
-  
+
   def remove_tag
     @restaurant.tag_list.remove(params[:tag_name])
     @restaurant.save
