@@ -1,8 +1,6 @@
 <div class="flex flex-wrap justify-between mb-4" data-restaurant-container >
-  <%# <div class="w-full md:w-1/2 lg:w-1/3 p-4"> %>
   <div class="w-full md:w-2/3 lg:w-1/2 p-4">
   <div class="card flex flex-row border rounded-lg overflow-hidden shadow-lg" data-rating="<%= restaurant.rating %>" data-bookmarks="<%= restaurant.bookmark_count %>">
-      <%# <div class="w-1/3"> %>
       <div class="form-control">
         <label class="label cursor-pointer">
           <input type="checkbox" class="hidden restaurant-checkbox checkbox checkbox-primary" data-restaurant-id="<%= restaurant.id %>">
@@ -12,7 +10,6 @@
         <%= image_tag (restaurant.image_url || 'default_image.png'), alt: restaurant.name,class: 'h-full w-full object-cover' %>
         <%= simple_format("Source of photo: #{restaurant.html_attributions}", class: "text-xs text-center mt-2") if restaurant.html_attributions.present? %>
       </div>
-      <%# <div class="w-2/3 p-4"> %>
       <div class="w-3/4 p-4">
         <h2 class="card-title text-lg font-bold mb-2"><%= restaurant.name %></h2>
         <p><%= t('activerecord.attributes.restaurants.address')%>：<%= restaurant.address %></p>
