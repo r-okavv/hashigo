@@ -5,28 +5,18 @@
         <i class="fa-solid fa-bars fa-xl" style="color: #fcfcfc;"></i>
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a><%= t 'defaults.search_menu' %></a>
-          <ul class="p-2">
-            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
-            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
-          </ul>
-        </li>
+        <li><%= link_to t('defaults.search'), search_restaurants_path %></li>
+        <li><%= link_to t('restaurants.bookmarks.title'), bookmarks_restaurants_path %></li>
+        <li><%= link_to t('defaults.my_reviews'), '#' %></li>
       </ul>
     </div>
     <%= link_to 'HASHIGO', root_path,class:"btn btn-ghost normal-case text-xl text-neutral-50" %>
   </div>
     <div class="navbar-center hidden lg:flex text-neutral-50">
     <ul class="menu menu-horizontal px-1">
-      <li tabindex="0">
-        <details>
-          <summary><%= t 'defaults.search_menu' %></summary>
-          <ul class="p-2 bg-cyan-700">
-            <li><%= link_to t('restaurants.search.title'), search_restaurants_path %></li>
-            <li><%= link_to t('restaurants.address_search.title'), address_search_restaurants_path %></li>
-          </ul>
-        </details>
-      </li>
+      <li><%= link_to t('defaults.search'), search_restaurants_path %></li>
+      <li><%= link_to t('restaurants.bookmarks.title'), bookmarks_restaurants_path %></li>
+      <li><%= link_to t('defaults.my_reviews'), '#' %></li>
     </ul>
   </div>
 <div class="navbar-end flex">

@@ -4,7 +4,7 @@ class RestaurantsController < ApplicationController
   require 'json'
 
   skip_before_action :require_login, only: %i[index show search address_search]
-  before_action :set_restaurant, only: [:tags, :edit_tag, :update_tag]
+  before_action :set_restaurant, only: %i[update_tag]
 
   def index
   end
