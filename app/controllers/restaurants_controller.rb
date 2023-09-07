@@ -14,19 +14,11 @@ class RestaurantsController < ApplicationController
   end
 
   def search
-    restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants)
-    @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
-  end
-
-  def address_search
-    if flash[:error]
-      redirect_to address_search_restaurants_path and return
+    if params[:address].present?
+      restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants)
+      @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
     end
-
-    restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants_from_address)
-    @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
   end
-
 
   def bookmarks
     bookmark_restaurants = current_user.bookmark_restaurants.order(created_at: :desc).page(params[:page])
@@ -58,38 +50,26 @@ class RestaurantsController < ApplicationController
     Restaurant.find_or_create_from_api_data(place_data)
   end
 
-
   def fetch_restaurants
-    if params[:address].present?
-      location = Geocoder.search(params[:address]).first
-      if location&.latitude.nil? || location&.longitude.nil?
-        flash[:error] = t('.fail')
-        return []
-      end
-      fetch_places_from_api("#{location.latitude},#{location.longitude}", opennow: true)
-    elsif params[:latitude].present? && params[:longitude].present?
-      location = "#{params[:latitude]},#{params[:longitude]}"
-      # 現在地から取得の場合は現在営業中の店舗のみを検索
-      fetch_places_from_api(location, opennow: true)
+    location = if params[:latitude] && params[:longitude].present?
+                 { latitude: params[:latitude], longitude: params[:longitude] }
+              else params[:address]
+                 geo_result = Geocoder.search(params[:address]).first
+                 unless geo_result&.latitude && geo_result&.longitude
+                   flash[:error] = t('.fail')
+                   return []
+                 end
+                 { latitude: geo_result.latitude, longitude: geo_result.longitude }
+               end
+  
+    if location && location[:latitude] && location[:longitude]
+      options = { opennow: true }
+      fetch_places_from_api("#{location[:latitude]},#{location[:longitude]}", options)
     else
-      return []
+      []
     end
   end
-
-  def fetch_restaurants_from_address
-    if params[:address]
-      location = Geocoder.search(params[:address]).first
-      if location.nil? || location&.latitude.nil? || location&.longitude.nil?
-        flash[:error] = t('.fail')
-        return []
-      end
-
-      return fetch_places_from_api("#{location.latitude},#{location.longitude}")
-    end
-    []
-  end
-
-
+  
   def fetch_places_from_api(location, options = {})
     base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     parameters = {
