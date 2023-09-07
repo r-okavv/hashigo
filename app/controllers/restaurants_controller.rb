@@ -53,7 +53,7 @@ class RestaurantsController < ApplicationController
   def fetch_restaurants
     location = if params[:latitude] && params[:longitude].present?
                  { latitude: params[:latitude], longitude: params[:longitude] }
-              else params[:address]
+              elsif params[:address]
                  geo_result = Geocoder.search(params[:address]).first
                  unless geo_result&.latitude && geo_result&.longitude
                    flash[:error] = t('.fail')
@@ -63,7 +63,9 @@ class RestaurantsController < ApplicationController
                end
   
     if location && location[:latitude] && location[:longitude]
-      options = { opennow: true }
+      options = {}
+      binding.pry
+      options[:opennow] = true if params[:open_now] == 'true'
       fetch_places_from_api("#{location[:latitude]},#{location[:longitude]}", options)
     else
       []

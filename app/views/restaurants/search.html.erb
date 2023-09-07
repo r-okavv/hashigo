@@ -21,16 +21,20 @@
           <%= f.label :radius,(t '.radius' ) %>
           <%= f.number_field :radius, value: params[:radius]|| 300, min: 50, max:5000, step: 50, class:"input input-bordered"  %>
         </div>
-        <div class="mb-6">
+        <p class="mb-2">お店のタイプ</p>
+        <div class="mb-6 px-4">
           <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
           <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
           <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
           <%= f.label :place_type, (t '.bar' ) %>
         </div>
-
-          <div class="mb-6">
+        <div class="mb-6">
           <%= f.label :rating, (t '.rating' )%>
           <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+        </div>
+        <div class="mb-6">
+          <%= f.check_box :open_now, { checked: true, class:"checkbox checkbox-accent"},true, false %>
+          <%= f.label :open_now, '営業中のお店のみを表示する' %>
         </div>
         <div class="mb-6">
           <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
@@ -50,16 +54,20 @@
           <%= f.label :radius,(t '.radius' ) %>
           <%= f.number_field :radius, value: params[:radius]|| 300, min: 50, max:5000, step: 50, class:"input input-bordered"  %>
         </div>
+        <p class="mb-2">お店のタイプ</p>
         <div class="mb-6">
           <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
           <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
           <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
           <%= f.label :place_type, (t '.bar' ) %>
         </div>
-
-          <div class="mb-6">
+        <div class="mb-6">
           <%= f.label :rating, (t '.rating' )%>
           <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+        </div>
+        <div class="mb-6">
+          <%= f.check_box :open_now, { checked: true, class:"checkbox checkbox-accent"},true, false %>
+          <%= f.label :open_now, '営業中のお店のみを表示する' %>
         </div>
         <div class="mb-6">
           <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
