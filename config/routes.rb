@@ -13,12 +13,10 @@ Rails.application.routes.draw do
   resources :restaurants, only: %i[index show] do
     collection do
       get :search
-      get :address_search
       get :bookmarks
     end
     member do
       post 'update_tag'
-      delete 'remove_tag'
     end
   end
   post 'select_restaurants', to: 'restaurants#random_select', as: 'select_restaurants'

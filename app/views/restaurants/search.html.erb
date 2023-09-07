@@ -1,41 +1,96 @@
 <div class="flex-grow flex items-center justify-center">
   <div class="container mx-auto px-4 py-4">
-    <h1 class="text-2xl font-bold mb-8"><%= t '.title' %></h1>
-    <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
-      <div class="mb-6 mt-6">
-        <button type="button" id="get-location" class="btn"><%= t '.get_location' %></button>
-      </div>
-      <div class="mb-6">
-        <%= f.label :address, (t '.address' )  %>
-        <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered" %>
-        <%= f.hidden_field :latitude, id: 'latitude' %>
-        <%= f.hidden_field :longitude, id: 'longitude' %>
-      </div>
-      <div class="mb-6">
-        <%= f.label :radius,(t '.radius' ) %>
-        <%= f.number_field :radius, value: params[:radius]|| 100, min: 50, step: 50, class:"input input-bordered"  %>
-      </div>
-      <div class="mb-6">
-        <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
-        <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
-        <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
-        <%= f.label :place_type, (t '.bar' ) %>
-      </div>
+      <div class="container px-4 py-4" >
+        <div class="tabs">
+          <button class="tab tab-lifted text-xl font-bold tab-active" data-target="search-form">現在地から検索</button>
+          <button class="tab tab-lifted text-xl font-bold" data-target="address-search-form">入力住所から検索</button>
+        </div>
 
+      <div id="search-form" class="tab-content">
+        <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
+        <div class="mb-6 mt-6">
+          <button type="button" id="get-location" class="btn"><%= t '.get_location' %></button>
+        </div>
         <div class="mb-6">
-        <%= f.label :rating, (t '.rating' )%>
-        <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
-      </div>
-      <div class="mb-6">
-        <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
-      </div>
-    <% end %>
+          <%= f.label :address, (t '.address' )  %>
+          <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered w-full max-w-sm" %>
+          <%= f.hidden_field :latitude, id: 'latitude' %>
+          <%= f.hidden_field :longitude, id: 'longitude' %>
+        </div>
+        <div class="mb-6">
+          <%= f.label :radius,(t '.radius' ) %>
+          <%= f.number_field :radius, value: params[:radius]|| 300, min: 50, max:5000, step: 50, class:"input input-bordered"  %>
+        </div>
+        <div class="mb-6">
+          <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
+          <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
+          <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
+          <%= f.label :place_type, (t '.bar' ) %>
+        </div>
 
-    <%= render 'search_results', restaurants: @restaurants  %>
+          <div class="mb-6">
+          <%= f.label :rating, (t '.rating' )%>
+          <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+        </div>
+        <div class="mb-6">
+          <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
+        </div>
+        <% end %>
+      </div>
+
+      <div id="address-search-form" class="tab-content" style="display: none;">
+      <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
+        <div class="mb-6 mt-6">
+          <%= f.label :address, (t '.address' ) %>
+          <%= f.text_field :address, id: 'address', value: params[:address], class:"input input-bordered  w-full max-w-sm" %>
+          <%= f.hidden_field :latitude, id: 'latitude' %>
+          <%= f.hidden_field :longitude, id: 'longitude' %>
+        </div>
+        <div class="mb-6">
+          <%= f.label :radius,(t '.radius' ) %>
+          <%= f.number_field :radius, value: params[:radius]|| 300, min: 50, max:5000, step: 50, class:"input input-bordered"  %>
+        </div>
+        <div class="mb-6">
+          <%= f.radio_button :place_type,'restaurant',checked:"checked", class: "radio radio-accent" %>
+          <%= f.label :place_type, (t '.restaurant' ) , class: "mr-4" %>
+          <%= f.radio_button :place_type, 'bar', class: "radio radio-accent"  %>
+          <%= f.label :place_type, (t '.bar' ) %>
+        </div>
+
+          <div class="mb-6">
+          <%= f.label :rating, (t '.rating' )%>
+          <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+        </div>
+        <div class="mb-6">
+          <%= f.submit (t '.submit' ), id: 'search-address',class:'btn' %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+    <div class="mt-6">
+      <%= render 'search_results', restaurants: @restaurants  %>
+    </div>
   </div>
 </div>
 
 <script>
+// タブの切り替えに関する処理
+document.addEventListener('turbo:load', function() {
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const target = this.getAttribute('data-target');
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = 'none';
+      });
+      document.getElementById(target).style.display = 'block';
+      tabs.forEach(t => t.classList.remove('tab-active'));
+      this.classList.add('tab-active');
+    });
+  });
+});
+
+// 現在地の取得、表示に関する処理
 document.addEventListener('turbo:load', function() {
   const getLocationButton = document.getElementById('get-location');
   const searchButton = document.getElementById('search-address');
