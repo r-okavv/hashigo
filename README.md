@@ -1,8 +1,6 @@
-# exam_app
-
 # **■サービス名**
 
-二軒目探しお助けサービス（仮名）
+HASHIGO
 
 # **■サービス概要**
 
@@ -82,23 +80,25 @@ https://www.figma.com/file/H5gD3hq93vnclZYDN6a2es/Portfolio_transition_diagram?t
 
 - β版をRUNTEQ内リリース（MVP）: 7/24 〆切
 
-- 本番リリース: 7月末
+- 本番リリース:9月末
 
 **技術選定**
 
-Rails7
+- Rails7
 
-JavaScript
+- JavaScript
 
-Bootstrap
+- Tailwind CSS
 
-Postgresql
+- DaisyUI
 
-Heroku
+- Postgresql
 
-API
+- Fly.io
 
-- Map JavaScript API
-- Places API
-- Geocoding API
+- API
+
+    - Maps JavaScript API
+    - Places API
+    - Geocoding API
 
