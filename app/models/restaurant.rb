@@ -17,7 +17,6 @@ class Restaurant < ApplicationRecord
       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo['photo_reference']}&key=#{ENV.fetch('GOOGLE_API_KEY', nil)}"
       html_attributions = photo['html_attributions'].first
     end
-
     restaurant.attributes = {
         place_id: details['place_id'],
         name: details['name'],
@@ -31,7 +30,11 @@ class Restaurant < ApplicationRecord
         image_url: photo_url,
         html_attributions: html_attributions,
         url: details['url'],
-        opening_hours: details['opening_hours'] ? details['opening_hours']["weekday_text"].join(", ") : "N/A"
+        opening_hours: details['opening_hours'] ? details['opening_hours']["weekday_text"].join(", ") : "N/A",
+        total_ratings: details['user_ratings_total'] || 0,
+        editorial_summary: details['editorial_summary'] ? details['editorial_summary']['overview'] : nil ,
+        serves_beer: details['serves_beer'],
+        serves_wine: details['serves_wine']
       }
     restaurant.save
     restaurant
@@ -41,7 +44,7 @@ class Restaurant < ApplicationRecord
     base_url = "https://maps.googleapis.com/maps/api/place/details/json"
     parameters = {
       place_id: place_id,
-      fields: 'place_id,name,geometry,formatted_phone_number,vicinity,rating,types,price_level,photos,url,opening_hours',
+      fields: 'place_id,name,geometry,formatted_phone_number,vicinity,rating,types,price_level,photos,url,opening_hours,user_ratings_total,editorial_summary,serves_beer,serves_wine',
       key: ENV.fetch('GOOGLE_API_KEY', nil),
       language: 'ja'
     }

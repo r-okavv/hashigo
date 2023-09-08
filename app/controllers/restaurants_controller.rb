@@ -43,7 +43,7 @@ class RestaurantsController < ApplicationController
   end
 
   def search_params
-    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address)
+    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address, :total_ratings)
   end
 
   def find_or_create_restaurant(place_data)
@@ -53,7 +53,7 @@ class RestaurantsController < ApplicationController
   def fetch_restaurants
     location = if params[:latitude] && params[:longitude].present?
                  { latitude: params[:latitude], longitude: params[:longitude] }
-              else params[:address]
+              elsif params[:address]
                  geo_result = Geocoder.search(params[:address]).first
                  unless geo_result&.latitude && geo_result&.longitude
                    flash[:error] = t('.fail')
@@ -63,7 +63,8 @@ class RestaurantsController < ApplicationController
                end
   
     if location && location[:latitude] && location[:longitude]
-      options = { opennow: true }
+      options = {}
+      options[:opennow] = true if params[:open_now] == 'true'
       fetch_places_from_api("#{location[:latitude]},#{location[:longitude]}", options)
     else
       []
@@ -88,7 +89,9 @@ class RestaurantsController < ApplicationController
     if search_params[:rating].present?
       restaurants.select! { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
+    if search_params[:total_ratings].present?
+      restaurants.select! { |restaurant| restaurant.total_ratings && restaurant.total_ratings >= search_params[:total_ratings].to_i }
+    end
     restaurants
   end
-
 end
