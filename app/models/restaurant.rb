@@ -34,6 +34,9 @@ class Restaurant < ApplicationRecord
         url: details['url'],
         opening_hours: details['opening_hours'] ? details['opening_hours']["weekday_text"].join(", ") : "N/A",
         total_ratings: details['user_ratings_total'] || 0
+        editorial_summary: details['editorial_summary']
+        serves_beer: details['serves_beer']
+        serves_wine: details['serves_wine']
       }
     restaurant.save
     restaurant
