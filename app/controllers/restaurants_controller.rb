@@ -43,7 +43,7 @@ class RestaurantsController < ApplicationController
   end
 
   def search_params
-    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address)
+    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address, :total_ratings)
   end
 
   def find_or_create_restaurant(place_data)
@@ -89,7 +89,9 @@ class RestaurantsController < ApplicationController
     if search_params[:rating].present?
       restaurants.select! { |restaurant| restaurant.rating && restaurant.rating >= search_params[:rating].to_f }
     end
+    if search_params[:total_ratings].present?
+      restaurants.select! { |restaurant| restaurant.total_ratings && restaurant.total_ratings >= search_params[:total_ratings].to_i }
+    end
     restaurants
   end
-
 end

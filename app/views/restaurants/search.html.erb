@@ -33,6 +33,10 @@
           <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
         </div>
         <div class="mb-6">
+          <%= f.check_box :total_ratings, { checked: true, class:"checkbox checkbox-accent"},30, 0 %>
+          <%= f.label :total_ratings, 'クチコミ数が30件以上のお店のみ表示する' %>
+        </div>
+        <div class="mb-6">
           <%= f.check_box :open_now, { checked: true, class:"checkbox checkbox-accent"},true, false %>
           <%= f.label :open_now, '営業中のお店のみを表示する' %>
         </div>
@@ -64,6 +68,10 @@
         <div class="mb-6">
           <%= f.label :rating, (t '.rating' )%>
           <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+        </div>
+        <div class="mb-6">
+          <%= f.check_box :total_ratings, { checked: true, class:"checkbox checkbox-accent"},30, 0 %>
+          <%= f.label :total_ratings, 'クチコミ数が30件以上のお店のみ表示する' %>
         </div>
         <div class="mb-6">
           <%= f.check_box :open_now, { checked: true, class:"checkbox checkbox-accent"},true, false %>

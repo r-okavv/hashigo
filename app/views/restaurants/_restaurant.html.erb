@@ -16,6 +16,7 @@
         <p><%= t('activerecord.attributes.restaurants.phone_number')%>：<%= restaurant.phone_number %></p>
         <p><%= t('activerecord.attributes.restaurants.rating')%>：<%= restaurant.rating %></p>
         <p><%= t('activerecord.attributes.restaurants.price_level')%>：<%= restaurant.price_level_str %></p>
+        <p><%= t('activerecord.attributes.restaurants.total_ratings')%>：<%= restaurant.total_ratings %></p>
         <p><%= t('restaurants.search.bookmark_count')%>：<%= restaurant.bookmark_count %></p>
         <div class="mt-4">
           <%= link_to (t 'restaurants.search.to_show_page'), restaurant_path(restaurant), class: "btn btn-primary" %>

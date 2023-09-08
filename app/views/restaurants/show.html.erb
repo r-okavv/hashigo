@@ -3,6 +3,9 @@
     <h1><%= @restaurant.name %></h1>
     <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
   </div>
+  <div>
+    <%= @restaurant.editorial_summary %>
+  </div>
 
   <div class="mb-4">
     <div id="map" style="height: 250px; width: 100%;"></div>
@@ -12,6 +15,7 @@
   <li><strong><%= t('activerecord.attributes.restaurants.phone_number')%>：</strong> <%= @restaurant.phone_number %>
   <li><strong><%= t('activerecord.attributes.restaurants.price_level')%>：</strong> <%= @restaurant.price_level_str %>
   <li><strong><%= t('activerecord.attributes.restaurants.rating')%>:</strong> <%= @restaurant.rating %>
+  <li><strong><%= t('activerecord.attributes.restaurants.total_ratings')%>:</strong> <%= @restaurant.total_ratings %>
   <li><strong><%= t('.bookmark_count')%>:</strong> <%= @restaurant.bookmark_count %>
   <li><strong><%= t('activerecord.attributes.tags.name')%>：</strong></p>
   <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
@@ -20,10 +24,10 @@
     <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
     <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
   <% end %>
-  <% if @restaurant.image_url%>
+  <% if @restaurant.image_url %>
     <%= image_tag (@restaurant.image_url), alt: @restaurant.name %>
     <%= simple_format("Photo by: #{@restaurant.html_attributions}") %>
-<% end %>
+  <% end %>
 
 </div>
 

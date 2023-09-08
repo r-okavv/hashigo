@@ -11,14 +11,12 @@ class Restaurant < ApplicationRecord
     return restaurant if restaurant.persisted?
 
     details = fetch_place_details(data['place_id'])
-    binding.pry
 
     if details['photos'].present?
       photo = details['photos'].first
       photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{photo['photo_reference']}&key=#{ENV.fetch('GOOGLE_API_KEY', nil)}"
       html_attributions = photo['html_attributions'].first
     end
-
     restaurant.attributes = {
         place_id: details['place_id'],
         name: details['name'],
@@ -33,9 +31,9 @@ class Restaurant < ApplicationRecord
         html_attributions: html_attributions,
         url: details['url'],
         opening_hours: details['opening_hours'] ? details['opening_hours']["weekday_text"].join(", ") : "N/A",
-        total_ratings: details['user_ratings_total'] || 0
-        editorial_summary: details['editorial_summary']
-        serves_beer: details['serves_beer']
+        total_ratings: details['user_ratings_total'] || 0,
+        editorial_summary: details['editorial_summary'] ? details['editorial_summary']['overview'] : nil ,
+        serves_beer: details['serves_beer'],
         serves_wine: details['serves_wine']
       }
     restaurant.save

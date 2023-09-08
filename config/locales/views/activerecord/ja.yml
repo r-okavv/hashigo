@@ -29,6 +29,10 @@ ja:
         image_url: '画像URL'
         html_attributions: '画像ソース'
         price_level: '価格帯'
+        total_ratings: 'クチコミ数'
+        editorial_summary: '概要'
+        serves_beer: 'ビールの提供'
+        serves_wine: 'ワインの提供'
         created_at: '登録日時'
         updated_at: '更新日時'
       tags:
