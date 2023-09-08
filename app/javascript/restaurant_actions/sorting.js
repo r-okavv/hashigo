@@ -1,6 +1,6 @@
 document.addEventListener('turbo:load', function() {
   const sortOptions = document.getElementById('sort-options');
-  
+
   if (sortOptions) {
     sortOptions.addEventListener('change', function() {
       const sortBy = this.value;

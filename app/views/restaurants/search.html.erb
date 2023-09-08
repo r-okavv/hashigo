@@ -30,7 +30,7 @@
         </div>
         <div class="mb-6">
           <%= f.label :rating, (t '.rating' )%>
-          <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false %>
+          <%= f.select :rating, [["選択しない", nil], ["1以上", 1], ["2以上", 2], ["3以上", 3], ["4以上", 4], ["5", 5]], selected: params[:rating], include_blank: false, class:"select select-bordered" %>
         </div>
         <div class="mb-6">
           <%= f.check_box :total_ratings, { checked: true, class:"checkbox checkbox-accent"},30, 0 %>
