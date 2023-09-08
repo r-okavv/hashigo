@@ -9,7 +9,7 @@ document.addEventListener('turbo:load', function() {
       checkboxes.forEach(checkbox => {
         checkbox.classList.remove('hidden');
       });
-      instruction.classList.remove('hidden'); 
+      instruction.classList.remove('hidden');
       selectCandidateButton.classList.add('hidden');
       randomButton.classList.remove('hidden');
     });
