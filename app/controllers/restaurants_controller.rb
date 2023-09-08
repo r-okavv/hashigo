@@ -64,7 +64,6 @@ class RestaurantsController < ApplicationController
   
     if location && location[:latitude] && location[:longitude]
       options = {}
-      binding.pry
       options[:opennow] = true if params[:open_now] == 'true'
       fetch_places_from_api("#{location[:latitude]},#{location[:longitude]}", options)
     else
