@@ -14,21 +14,36 @@
   <li><strong><%= t('activerecord.attributes.restaurants.address')%>：</strong> <%= @restaurant.address %>
   <li><strong><%= t('activerecord.attributes.restaurants.phone_number')%>：</strong> <%= @restaurant.phone_number %>
   <li><strong><%= t('activerecord.attributes.restaurants.price_level')%>：</strong> <%= @restaurant.price_level_str %>
-  <li><strong><%= t('activerecord.attributes.restaurants.rating')%>:</strong> <%= @restaurant.rating %>
-  <li><strong><%= t('activerecord.attributes.restaurants.total_ratings')%>:</strong> <%= @restaurant.total_ratings %>
-  <li><strong><%= t('.bookmark_count')%>:</strong> <%= @restaurant.bookmark_count %>
+  <li><strong><%= t('activerecord.attributes.restaurants.rating')%>：</strong> <%= @restaurant.rating %>
+  <li><strong><%= t('activerecord.attributes.restaurants.total_ratings')%>：</strong> <%= @restaurant.total_ratings %>
+  <li><strong><%= t('.bookmark_count')%>：</strong> <%= @restaurant.bookmark_count %>
   <li><strong><%= t('activerecord.attributes.tags.name')%>：</strong></p>
   <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
   <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
   <% if @restaurant.opening_hours && @restaurant.opening_hours != "N/A" %>
     <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
-    <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+    <div class="px-4">
+      <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+    </div>
   <% end %>
-  <% if @restaurant.image_url %>
+  <div class="py-4">
+    <ul class="list-none p-0 flex">
+      <% if @restaurant.serves_beer %>
+        <li class="mr-5 flex items-center">
+          <%= image_tag 'beer.png', class: 'object-scale-down w-6 h-12 mr-2' %>ビール提供あり
+        </li>
+      <% end %>
+      <% if @restaurant.serves_wine %>
+        <li class="flex items-center">
+          <%= image_tag 'wine.png', class: 'object-scale-down w-1 h-2 mr-2' %>ワイン提供あり
+        </li>
+      <% end %>
+    </ul>
+  </div>
+    <% if @restaurant.image_url %>
     <%= image_tag (@restaurant.image_url), alt: @restaurant.name %>
     <%= simple_format("Photo by: #{@restaurant.html_attributions}") %>
   <% end %>
-
 </div>
 
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
