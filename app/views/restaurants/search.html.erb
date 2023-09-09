@@ -1,12 +1,12 @@
 <div class="flex-grow flex items-center justify-center">
-  <div class="container mx-auto px-4 py-4">
-      <div class="container px-4 py-4" >
-        <div class="tabs">
-          <button class="tab tab-lifted text-xl font-bold tab-active" data-target="search-form">現在地から検索</button>
-          <button class="tab tab-lifted text-xl font-bold" data-target="address-search-form">入力住所から検索</button>
-        </div>
+  <div class="container mx-auto px-4 py-4 md:w-2/3 lg:w-1/2">
+    <div class="container px-6 py-6 md:px-36 md:rounded-md shadow-md" >
+      <div class="tabs tab-bordered flex justify-center">
+        <button class="tab tab-lifted text-xl font-bold tab-active" data-target="search-form">現在地から検索</button>
+        <button class="tab tab-lifted text-xl font-bold" data-target="address-search-form">入力住所から検索</button>
+      </div>
 
-      <div id="search-form" class="tab-content">
+      <div id="search-form" class="tab-content flex flex-col items-center">
         <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
         <div class="mb-6 mt-6">
           <button type="button" id="get-location" class="btn"><%= t '.get_location' %></button>
@@ -46,7 +46,7 @@
         <% end %>
       </div>
 
-      <div id="address-search-form" class="tab-content" style="display: none;">
+      <div id="address-search-form" class="tab-content flex flex-col items-center" style="display: none;">
       <%= form_with url: search_restaurants_path, method: :get, local: true, id: 'address-form' do |f| %>
         <div class="mb-6 mt-6">
           <%= f.label :address, (t '.address' ) %>
@@ -148,7 +148,7 @@ document.addEventListener('turbo:load', function() {
       }
 
       function error() {
-        alert('Unable to retrieve your location');
+        alert('現在地を取得できませんでした。');
       }
 
       navigator.geolocation.getCurrentPosition(success, error);
