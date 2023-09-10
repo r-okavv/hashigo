@@ -1,49 +1,51 @@
-<div class="container mx-auto px-6 py-6">
-  <div class="text-2xl font-bold mt-4 mb-4 flex items-center justify-between">
-    <h1><%= @restaurant.name %></h1>
-    <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
-  </div>
-  <div>
-    <%= @restaurant.editorial_summary %>
-  </div>
-
-  <div class="mb-4 ">
-    <div id="map" class="w-full h-72  md:w-4/5 md:h-96 lg:w-3/5 lg:h-96"></div>
-  </div>
-
-  <li><strong><%= t('activerecord.attributes.restaurants.address')%>：</strong> <%= @restaurant.address %>
-  <li><strong><%= t('activerecord.attributes.restaurants.phone_number')%>：</strong> <%= @restaurant.phone_number %>
-  <li><strong><%= t('activerecord.attributes.restaurants.price_level')%>：</strong> <%= @restaurant.price_level_str %>
-  <li><strong><%= t('activerecord.attributes.restaurants.rating')%>：</strong> <%= @restaurant.rating %>
-  <li><strong><%= t('activerecord.attributes.restaurants.total_ratings')%>：</strong> <%= @restaurant.total_ratings %>
-  <li><strong><%= t('.bookmark_count')%>：</strong> <%= @restaurant.bookmark_count %>
-  <li><strong><%= t('activerecord.attributes.tags.name')%>：</strong></p>
-  <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
-  <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
-  <% if @restaurant.opening_hours && @restaurant.opening_hours != "N/A" %>
-    <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
-    <div class="px-4">
-      <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+<div class="bg-cyan-800">
+  <div class="container mx-auto px-12 md:w-4/5 lg:w-1/2 mt-4 py-6 bg-white md:rounded-md md:drop-shadow-md">
+    <div class="text-2xl font-bold mt-4 mb-4 flex items-center justify-between">
+      <h1><%= @restaurant.name %></h1>
+      <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
     </div>
-  <% end %>
-  <div class="py-4">
-    <ul class="list-none p-0 flex">
-      <% if @restaurant.serves_beer %>
-        <li class="mr-5 flex items-center">
-          <%= image_tag 'beer.png', class: 'object-scale-down w-6 h-12 mr-2' %>ビール提供あり
-        </li>
-      <% end %>
-      <% if @restaurant.serves_wine %>
-        <li class="flex items-center">
-          <%= image_tag 'wine.png', class: 'object-scale-down w-6 h-12 mr-2' %>ワイン提供あり
-        </li>
-      <% end %>
-    </ul>
+    <div>
+      <%= @restaurant.editorial_summary %>
+    </div>
+
+    <div class="mb-4 ">
+      <div id="map" class="w-full h-72 md:h-96 lg:w-full lg:h-96"></div>
+    </div>
+
+    <li><strong><%= t('activerecord.attributes.restaurants.address')%>：</strong> <%= @restaurant.address %>
+    <li><strong><%= t('activerecord.attributes.restaurants.phone_number')%>：</strong> <%= @restaurant.phone_number %>
+    <li><strong><%= t('activerecord.attributes.restaurants.price_level')%>：</strong> <%= @restaurant.price_level_str %>
+    <li><strong><%= t('activerecord.attributes.restaurants.rating')%>：</strong> <%= @restaurant.rating %>
+    <li><strong><%= t('activerecord.attributes.restaurants.total_ratings')%>：</strong> <%= @restaurant.total_ratings %>
+    <li><strong><%= t('.bookmark_count')%>：</strong> <%= @restaurant.bookmark_count %>
+    <li><strong><%= t('activerecord.attributes.tags.name')%>：</strong></p>
+    <%= render partial: 'tags_section', locals: { restaurant: @restaurant } %>
+    <li><strong>URL:</strong> <%= link_to @restaurant.url, @restaurant.url, target: "_blank" %></p>
+    <% if @restaurant.opening_hours && @restaurant.opening_hours != "N/A" %>
+      <li><strong><%= t('activerecord.attributes.restaurants.opening_hours') %>:</strong></li>
+      <div class="px-4">
+        <%= simple_format(@restaurant.opening_hours.gsub(",", "\n")) %>
+      </div>
+    <% end %>
+    <div class="py-4">
+      <ul class="list-none p-0 flex">
+        <% if @restaurant.serves_beer %>
+          <li class="mr-5 flex items-center">
+            <%= image_tag 'beer.png', class: 'object-scale-down w-6 h-12 mr-2' %>ビール提供あり
+          </li>
+        <% end %>
+        <% if @restaurant.serves_wine %>
+          <li class="flex items-center">
+            <%= image_tag 'wine.png', class: 'object-scale-down w-6 h-12 mr-2' %>ワイン提供あり
+          </li>
+        <% end %>
+      </ul>
+    </div>
+      <% if @restaurant.image_url %>
+      <%= image_tag (@restaurant.image_url), alt: @restaurant.name %>
+      <%= simple_format("Photo by: #{@restaurant.html_attributions}") %>
+    <% end %>
   </div>
-    <% if @restaurant.image_url %>
-    <%= image_tag (@restaurant.image_url), alt: @restaurant.name %>
-    <%= simple_format("Photo by: #{@restaurant.html_attributions}") %>
-  <% end %>
 </div>
 
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
