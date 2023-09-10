@@ -16,6 +16,9 @@ class RestaurantsController < ApplicationController
   def search
     if params[:address].present?
       restaurants_array = RestaurantDecorator.decorate_collection(fetch_restaurants)
+      if restaurants_array.length == 0
+        flash.now[:notice] = t('.not_found')
+      end
       @restaurants = Kaminari.paginate_array(restaurants_array).page(params[:page])
     end
   end
