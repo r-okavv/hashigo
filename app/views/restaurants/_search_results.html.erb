@@ -19,6 +19,10 @@
 <div class="mt-4 mb-6 text-center">
   <button id="select-candidate-button" class="btn btn-secondary"><%= t 'restaurants.search.start_select' %></button>
   <button id="random-button" class="btn btn-secondary hidden"><%= t 'restaurants.search.exec_random_select' %></button>
+  <div class="mb-6 hidden" id="check-all-container">
+    <%= check_box_tag 'check_all', '1', false, id: 'check-all' %>
+    <%= label_tag 'check_all', '全てのお店を選択' %>
+  </div>
   <p id="instruction" class="hidden"><%= t 'restaurants.search.instruction_for_select' %></p>
 </div>
 <% end %>
