@@ -43,7 +43,7 @@ class RestaurantsController < ApplicationController
   end
 
   def search_params
-    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address, :total_ratings)
+    params.permit(:radius, :place_type, :rating, :latitude, :longitude, :address, :total_ratings, :open_now)
   end
 
   def find_or_create_restaurant(place_data)
@@ -70,7 +70,7 @@ class RestaurantsController < ApplicationController
       []
     end
   end
-  
+
   def fetch_places_from_api(location, options = {})
     base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
     parameters = {
