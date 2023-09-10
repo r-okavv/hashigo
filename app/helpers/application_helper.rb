@@ -2,11 +2,11 @@ module ApplicationHelper
   def default_meta_tags
     {
       site: 'HASHIGO',
-      title: '二次会会場を迅速に選ぶサポートアプリ',
+      title: '飲み会の「次どこ行く？」を解決するサポートアプリ',
       reverse: true,
       charset: 'utf-8',
-      description: '近くの高評価店舗を即座に絞り込み！今すぐHASHIGOを使ってスムーズなお店選びを体験しましょう！',
-      keywords: 'スポーツ,スポーツ施設,東京',
+      description: '近くの高評価店がすぐに見つかる！今すぐHASHIGOを使ってスムーズなお店選びを体験しましょう。',
+      keywords: '飲み会,二次会,居酒屋',
       canonical: request.original_url,
       separator: '|',
       og: {

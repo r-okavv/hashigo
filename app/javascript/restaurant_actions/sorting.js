@@ -10,12 +10,12 @@ document.addEventListener('turbo:load', function() {
       let sortedRestaurants;
 
       switch (sortBy) {
-        case 'rating':
+        case 'total_ratings': 
           sortedRestaurants = restaurants.sort((a, b) => {
             const aCard = a.querySelector('.card');
             const bCard = b.querySelector('.card');
-            const aValue = parseFloat(aCard.getAttribute('data-rating'));
-            const bValue = parseFloat(bCard.getAttribute('data-rating'));
+            const aValue = parseFloat(aCard.getAttribute('data-total_ratings'));
+            const bValue = parseFloat(bCard.getAttribute('data-total_ratings'));
             return bValue - aValue; // 降順
           });
           break;
