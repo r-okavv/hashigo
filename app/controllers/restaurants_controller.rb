@@ -95,6 +95,7 @@ class RestaurantsController < ApplicationController
     if search_params[:total_ratings].present?
       restaurants.select! { |restaurant| restaurant.total_ratings && restaurant.total_ratings >= search_params[:total_ratings].to_i }
     end
+    restaurants.sort_by! { |restaurant| -restaurant.rating.to_f }
     restaurants
   end
 end
