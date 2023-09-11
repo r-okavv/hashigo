@@ -65,5 +65,8 @@ function initMap() {
     position: restaurantLocation,
     map: map
   });
+  google.maps.event.addListener(marker, 'click', function() {
+    window.location.href = '<%= @restaurant.url %>';
+  });
 }
 </script>
