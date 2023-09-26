@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'user_sessions/create'
   get 'user_sessions/destroy'
 
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback"
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
   resources :users, only: %i[new create]
   resources :restaurants, only: %i[index show] do
     collection do
