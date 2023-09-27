@@ -86,3 +86,4 @@ gem 'kaminari'
 gem 'draper'
 gem "meta-tags"
 gem 'omniauth-google-oauth2'
+gem 'config'
