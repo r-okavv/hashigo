@@ -164,7 +164,7 @@ Rails.application.config.sorcery.configure do |config|
   config.google.key = Rails.application.credentials.dig(:google, :google_client_id)
   config.google.secret = Rails.application.credentials.dig(:google, :google_client_secret)
   config.google.callback_url = Settings.sorcery[:google_callback_url]
-  # config.google.user_info_mapping = {:email => "email", :username => "name"}
+  config.google.user_info_mapping = {:email => "email", :username => "name"}
   # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
@@ -247,6 +247,7 @@ Rails.application.config.sorcery.configure do |config|
 end
   # --- user config ---
   config.user_config do |user|
+    user.authentications_class = Authentication
     # -- core --
     # Specify username attributes, for example: [:username, :email].
     # Default: `[:email]`

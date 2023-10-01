@@ -10,13 +10,11 @@ class OauthsController < ApplicationController
       redirect_to root_path, notice: 'ログインをキャンセルしました'
       return
     end
-    if (@user = login_form(provider))
-      redirect_to search_restaurants_path, notice:"#{provider.titleize}でログインしました"
+    if (@user = login_from(provider))
+      redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
     else
-      @user = create_form(provider)
-      reset_session
-      auto_login(@user)
-      redirect_to search_restaurants_path, notice:"#{provider.titleize}でログインしました"
+      create_user_and_login_from(provider)
+      redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
     end
   end
 
@@ -24,5 +22,11 @@ class OauthsController < ApplicationController
 
   def auth_params
     params.permit(:code, :provider)
+  end
+
+  def create_user_and_login_from(provider)
+    @user = create_from(provider)
+    reset_session
+    auto_login(@user)
   end
 end
