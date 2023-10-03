@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_062237) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_115715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -21,6 +30,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_062237) do
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_bookmarks_on_restaurant_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "questionnaire_restaurants", force: :cascade do |t|
+    t.bigint "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "questionnaire_id", null: false
+    t.index ["questionnaire_id", "restaurant_id"], name: "index_on_questionnaire_and_restaurant", unique: true
+    t.index ["questionnaire_id"], name: "index_questionnaire_restaurants_on_questionnaire_id"
+    t.index ["restaurant_id"], name: "index_questionnaire_restaurants_on_restaurant_id"
+  end
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.bigint "questionnaire_restaurants_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "uuid"
+    t.index ["questionnaire_restaurants_id"], name: "index_questionnaires_on_questionnaire_restaurants_id"
+    t.index ["user_id"], name: "index_questionnaires_on_user_id"
+    t.index ["uuid"], name: "index_questionnaires_on_uuid"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -86,7 +117,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_062237) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "questionnaire_restaurant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionnaire_restaurant_id"], name: "index_votes_on_questionnaire_restaurant_id"
+  end
+
   add_foreign_key "bookmarks", "restaurants"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "questionnaire_restaurants", "questionnaires"
+  add_foreign_key "questionnaire_restaurants", "restaurants"
+  add_foreign_key "questionnaires", "questionnaire_restaurants", column: "questionnaire_restaurants_id"
+  add_foreign_key "questionnaires", "users"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "votes", "questionnaire_restaurants"
 end

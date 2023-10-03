@@ -85,3 +85,5 @@ gem 'acts-as-taggable-on', '~> 9.0'
 gem 'kaminari'
 gem 'draper'
 gem "meta-tags"
+gem 'omniauth-google-oauth2'
+gem 'config'

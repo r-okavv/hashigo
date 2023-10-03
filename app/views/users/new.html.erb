@@ -22,6 +22,12 @@
 							<%= f.submit (t 'defaults.register'), class: 'btn' %>
 						</div>
 					<% end %>
+          <div class='text-center mt-4 px-4'>
+            <%= link_to auth_at_provider_path(provider: :google), class: "px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150" do %>
+              <img class="w-6 h-6 mr-2" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+              <span>Signup with Google</span>
+            <% end %>
+          </div>
 					<div class='text-center mt-4'>
 						<%= link_to (t '.to_login_page'), login_path %>
 					</div>
