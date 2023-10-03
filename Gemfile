@@ -87,3 +87,4 @@ gem 'draper'
 gem "meta-tags"
 gem 'omniauth-google-oauth2'
 gem 'config'
+gem 'high_voltage'
