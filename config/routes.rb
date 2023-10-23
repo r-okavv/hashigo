@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post 'select_restaurants', to: 'restaurants#random_select', as: 'select_restaurants'
   post 'get_location', to: 'locations#get_location'
   resources :bookmarks, only: %i[create destroy]
+  get "/pages/*id" => 'pages#show', as: :page, format: false
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
