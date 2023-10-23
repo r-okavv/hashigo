@@ -13,8 +13,12 @@ class OauthsController < ApplicationController
     if (@user = login_from(provider))
       redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
     else
-      create_user_and_login_from(provider)
-      redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
+      begin
+        create_user_and_login_from(provider)
+        redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
+      rescue
+        redirect_to root_path, alert:"#{provider.titleize}アカウントでのログインに失敗しました!"
+      end
     end
   end
 
