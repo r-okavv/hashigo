@@ -16,6 +16,8 @@ class OauthsController < ApplicationController
       begin
         create_user_and_login_from(provider)
         redirect_to search_restaurants_path, notice:"#{provider.titleize}アカウントでログインしました"
+      rescue ActiveRecord::RecordNotUnique
+        redirect_to root_path, error: "#{provider.titleize}ログインに失敗しました。ご使用のメールアドレスはすでに登録されている可能性があります。"
       rescue
         redirect_to root_path, alert:"#{provider.titleize}アカウントでのログインに失敗しました!"
       end
