@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/create'
+  get 'password_resets/edit'
+  get 'password_resets/update'
   root 'static_pages#top'
   # root 'restaurants#index'
   get 'login' => 'user_sessions#new', :as => :login
