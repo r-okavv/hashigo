@@ -34,7 +34,8 @@ ja:
   password_resets:
     new:
       title: 'パスワードの再設定'
-      submit: '送信'
+    edit:
+      title: 'パスワードの再設定'
   restaurants:
     search:
       title: '現在地から検索'
