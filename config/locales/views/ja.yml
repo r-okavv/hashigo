@@ -31,6 +31,10 @@ ja:
       fail: 'ログインに失敗しました'
     destroy:
       success: 'ログアウトしました'
+  password_resets:
+    new:
+      title: 'パスワードの再設定'
+      submit: '送信'
   restaurants:
     search:
       title: '現在地から検索'

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
   resources :users, only: %i[new create]
+  resources :password_resets, only: %i[new create edit update]
   resources :restaurants, only: %i[index show] do
     collection do
       get :search
