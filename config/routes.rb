@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   get 'password_resets/new'
   get 'password_resets/create'
   get 'password_resets/edit'

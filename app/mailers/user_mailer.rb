@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.reset_password_email.subject
   #
   default from: 'from@example.com'
-  def reset_password_email
+  def reset_password_email(user)
     @user = User.find(user.id)
     @url = edit_password_reset_url(@user.reset_password_token)
     mail(to: user.email, subject: 'HASHIGO：パスワード再設定手続きのお知らせ')

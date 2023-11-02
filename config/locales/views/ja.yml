@@ -34,6 +34,10 @@ ja:
   password_resets:
     new:
       title: 'パスワードの再設定'
+      submit: '送信'
+    create:
+      success: 'パスワード再設定用URLを送信しました'
+      fail: 'メールの送信に失敗しました'
     edit:
       title: 'パスワードの再設定'
   restaurants:
