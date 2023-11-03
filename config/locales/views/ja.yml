@@ -40,6 +40,9 @@ ja:
       fail: 'メールの送信に失敗しました'
     edit:
       title: 'パスワードの再設定'
+    update:
+      success: 'パスワードを更新しました'
+      fail: 'パスワードの更新に失敗しました'
   restaurants:
     search:
       title: '現在地から検索'
