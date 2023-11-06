@@ -32,28 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_144945) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "questionnaire_restaurants", force: :cascade do |t|
-    t.bigint "restaurant_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "questionnaire_id", null: false
-    t.index ["questionnaire_id", "restaurant_id"], name: "index_on_questionnaire_and_restaurant", unique: true
-    t.index ["questionnaire_id"], name: "index_questionnaire_restaurants_on_questionnaire_id"
-    t.index ["restaurant_id"], name: "index_questionnaire_restaurants_on_restaurant_id"
-  end
-
-  create_table "questionnaires", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.bigint "questionnaire_restaurants_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "uuid"
-    t.index ["questionnaire_restaurants_id"], name: "index_questionnaires_on_questionnaire_restaurants_id"
-    t.index ["user_id"], name: "index_questionnaires_on_user_id"
-    t.index ["uuid"], name: "index_questionnaires_on_uuid"
-  end
-
   create_table "restaurants", force: :cascade do |t|
     t.string "place_id", null: false
     t.string "name", null: false
@@ -122,19 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_144945) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.bigint "questionnaire_restaurant_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["questionnaire_restaurant_id"], name: "index_votes_on_questionnaire_restaurant_id"
-  end
-
   add_foreign_key "bookmarks", "restaurants"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "questionnaire_restaurants", "questionnaires"
-  add_foreign_key "questionnaire_restaurants", "restaurants"
-  add_foreign_key "questionnaires", "questionnaire_restaurants", column: "questionnaire_restaurants_id"
-  add_foreign_key "questionnaires", "users"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "votes", "questionnaire_restaurants"
 end
