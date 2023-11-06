@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  # get 'password_resets/new'
+  # get 'password_resets/create'
+  # get 'password_resets/edit'
+  # get 'password_resets/update'
+  resources :password_resets, only: [:new, :create, :edit, :update]
   root 'static_pages#top'
   # root 'restaurants#index'
   get 'login' => 'user_sessions#new', :as => :login
@@ -14,6 +20,7 @@ Rails.application.routes.draw do
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
   resources :users, only: %i[new create]
+  resources :password_resets, only: %i[new create edit update]
   resources :restaurants, only: %i[index show] do
     collection do
       get :search
