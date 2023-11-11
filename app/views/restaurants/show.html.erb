@@ -48,12 +48,8 @@
   </div>
 </div>
 
-<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
 <script>
-window.addEventListener('turbo:load', function() {
-  LineIt.loadButton();
-});
 
 function initMap() {
   var restaurantLocation = {lat: <%= @restaurant.latitude %>, lng: <%= @restaurant.longitude %>};
