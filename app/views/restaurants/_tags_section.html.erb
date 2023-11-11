@@ -22,16 +22,20 @@ document.addEventListener('turbo:load', function() {
   const editButton = document.getElementById("edit-button");
   const tagSection = document.getElementById("tag-section");
   const tagForm = document.getElementById("tag-form");
-  const form = tagForm.querySelector('form');
+  if (tagForm) {
+    const form = tagForm.querySelector('form');
 
-  editButton.addEventListener("click", function() {
-    tagSection.style.display = "none";
-    tagForm.style.display = "block";
-  });
+    editButton.addEventListener("click", function() {
+      tagSection.style.display = "none";
+      tagForm.style.display = "block";
+    });
 
-  form.addEventListener("submit", function(event) {
-    tagForm.style.display = "none";
-    tagSection.style.display = "block";
-  });
+    if (form) {
+      form.addEventListener("submit", function(event) {
+        tagForm.style.display = "none";
+        tagSection.style.display = "block";
+      });
+    }
+  }
 });
 </script>
