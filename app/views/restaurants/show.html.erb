@@ -2,7 +2,7 @@
   <div class="container mx-auto px-12 md:w-4/5 lg:w-1/2 mt-4 py-6 bg-white md:rounded-md md:drop-shadow-md">
     <div class="text-2xl font-bold mt-4 mb-4 flex items-center justify-between">
       <h1><%= @restaurant.name %></h1>
-      <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="REAL" data-url="https://hashigo.fly.dev//restaurants/<%= @restaurant.id %>" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+      <%= link_to(image_tag('LINE_Brand_icon.png', width: 40, height: 40), "https://line.me/R/share?text=https://hashigo.fly.dev/restaurants/#{@restaurant.id}") %>
     </div>
     <div>
       <%= @restaurant.editorial_summary %>
@@ -48,12 +48,8 @@
   </div>
 </div>
 
-<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
 <script>
-window.addEventListener('turbo:load', function() {
-  LineIt.loadButton();
-});
 
 function initMap() {
   var restaurantLocation = {lat: <%= @restaurant.latitude %>, lng: <%= @restaurant.longitude %>};
