@@ -57,6 +57,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem "rspec-rails"
   gem "factory_bot_rails"
+  gem 'bullet'
 end
 
 group :test do
@@ -70,7 +71,6 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
-  gem 'bullet'
   gem 'letter_opener_web', '~> 2.0'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

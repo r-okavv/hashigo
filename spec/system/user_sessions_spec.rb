@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'UserSessions', type: :system do
   let(:user) { create(:user) }
 
@@ -7,9 +9,9 @@ RSpec.describe 'UserSessions', type: :system do
         visit login_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: 'password'
-        click_button 'Login'
-        expect(page).to have_content 'Login successful'
-        expect(current_path).to eq root_path
+        click_button 'ログイン'
+        expect(page).to have_content 'ログインしました'
+        expect(current_path).to eq search_restaurants_path
       end
     end
 
@@ -18,8 +20,8 @@ RSpec.describe 'UserSessions', type: :system do
         visit login_path
         fill_in 'Email', with: ''
         fill_in 'Password', with: 'password'
-        click_button 'Login'
-        expect(page).to have_content 'Login failed'
+        click_button 'ログイン'
+        expect(page).to have_content 'ログインに失敗しました'
         expect(current_path).to eq login_path
       end
     end
@@ -29,9 +31,9 @@ RSpec.describe 'UserSessions', type: :system do
     context 'ログアウトボタンをクリック' do
       it 'ログアウト処理が成功する' do
         login_as(user)
-        click_link 'Logout'
-        expect(page).to have_content 'Logged out'
-        expect(current_path).to eq root_path
+        click_link 'ログアウト'
+        expect(page).to have_content 'ログアウトしました'
+        expect(current_path).to eq login_path
       end
     end
   end

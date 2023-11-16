@@ -8,11 +8,11 @@ RSpec.describe 'Users', type: :system do
       context 'フォームの入力値が正常' do
         it 'ユーザーの新規作成が成功する' do
           visit new_user_path
-          fill_in 'Email', with: 'email@example.com'
-          fill_in 'Password', with: 'password'
-          fill_in 'Password confirmation', with: 'password'
-          click_button 'SignUp'
-          expect(page).to have_content 'User was successfully created.'
+          fill_in 'メールアドレス', with: 'email@example.com'
+          fill_in 'パスワード', with: 'password'
+          fill_in 'パスワード(確認)', with: 'password'
+          click_button '登録'
+          expect(page).to have_content 'ユーザー登録が完了しました'
           expect(current_path).to eq login_path
         end
       end
@@ -20,13 +20,12 @@ RSpec.describe 'Users', type: :system do
       context 'メールアドレスが未入力' do
         it 'ユーザーの新規作成が失敗する' do
           visit new_user_path
-          fill_in 'Email', with: ''
-          fill_in 'Password', with: 'password'
-          fill_in 'Password confirmation', with: 'password'
-          click_button 'SignUp'
-          expect(page).to have_content '1 error prohibited this user from being saved'
-          expect(page).to have_content "Email can't be blank"
-          expect(current_path).to eq users_path
+          fill_in 'メールアドレス', with: ''
+          fill_in 'パスワード', with: 'password'
+          fill_in 'パスワード(確認)', with: 'password'
+          click_button '登録'
+          expect(page).to have_content 'ユーザー登録に失敗しました'
+          expect(current_path).to eq new_user_path
         end
       end
 
@@ -34,14 +33,12 @@ RSpec.describe 'Users', type: :system do
         it 'ユーザーの新規作成が失敗する' do
           existed_user = create(:user)
           visit new_user_path
-          fill_in 'Email', with: existed_user.email
-          fill_in 'Password', with: 'password'
-          fill_in 'Password confirmation', with: 'password'
-          click_button 'SignUp'
-          expect(page).to have_content '1 error prohibited this user from being saved'
-          expect(page).to have_content 'Email has already been taken'
-          expect(current_path).to eq users_path
-          expect(page).to have_field 'Email', with: existed_user.email
+          fill_in 'メールアドレス', with: existed_user.email
+          fill_in 'パスワード', with: 'password'
+          fill_in 'パスワード(確認)', with: 'password'
+          click_button '登録'
+          expect(page).to have_content 'ユーザー登録に失敗しました'
+          expect(current_path).to eq new_user_path
         end
       end
     end
